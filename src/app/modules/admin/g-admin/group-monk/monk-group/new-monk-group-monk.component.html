@@ -1,0 +1,92 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    เพิ่มพระสงฆ์เข้ากลุ่ม
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form [formGroup]="formData">
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    กลุ่มพระสงฆ์
+                </div>
+                <div class="flex-initial w-full">
+                    <mat-form-field class="w-2/6 pr-2">
+                        <mat-select [formControlName]="'group_id'" (selectionChange)="onChange($event)">
+                            <mat-option *ngFor="let role of groupmonkData" [value]="role.id">
+                                {{role.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            &nbsp;
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    พระสงฆ์
+                </div>
+                <div class="flex-initial w-full">
+                    <mat-form-field class="w-2/6 pr-2">
+                        <mat-select [formControlName]="'monk_id'">
+                            <mat-option *ngFor="let role of monkData" [value]="role.id">
+                                {{role.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="item/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addMonk()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+        <div class="flex items-start justify-end w-full border-t px-8 py-4">
+            <div id="tabs-1-panel-1" class="space-y-10 px-4 pt-10 pb-8 " aria-labelledby=" tabs-1-tab-1" role="tabpanel"
+                tabindex="0">
+                <div class="grid grid-cols-4 gap-x-4">
+                    <div class="group relative text-sm pr-4" *ngFor="let mo of monkGroupData; let i = index">
+                        <div
+                            class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                            <img [src]='mo.monk.image'
+                                alt="Models sitting back to back, wearing Basic Tee in black and bone."
+                                class="object-cover object-center">
+                        </div>
+
+                        <a class="mt-6 block font-extrabold text-gray-900">
+                            <span class="absolute inset-0 z-10" aria-hidden="true"></span>
+                            {{mo.monk.name}}
+                        </a>
+                        <div class="flex flex-row  justify-between">
+                            <p aria-hidden="true" class="mt-1 ">โทร. {{mo.monk.phone}}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="delete(1)">
+                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                ยกเลิก
+            </button>
+        </div>
+
+    </div>

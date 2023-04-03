@@ -1,0 +1,408 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างคำสั่งซื้อ
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+
+    <div class="flex-auto p-3 sm:p-10">
+        <form [formGroup]="formData">
+            <div class="flex">
+
+                <div class="card1">
+                    ข้อมูลลูกค้า
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            วันที่
+                        </div>
+                        <mat-form-field appearance="fill" style="width: 100%!important;">
+                            <!-- <mat-label>Choose a date</mat-label> -->
+                            <input matInput [matDatepicker]="picker" [formControlName]="'date_time'">
+                            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            ช่องทางการขาย
+                        </div>
+                        <mat-form-field class="flex-none h-12 w-32" style="width: 570px!important;">
+                            <mat-select [formControlName]="'channal'">
+                                <mat-option value="">เลือกช่องทางการขาย</mat-option>
+                                <mat-option *ngFor="let role of channelData" [value]="role.name">
+                                    <!-- <div class="flex">    <img src="{{role.image}}" style="width: 5px; height: 5px;">  -->
+                                    {{role.des}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <BR>
+                    <ng-container *ngIf="formData.value.channal === 'Other'">
+
+                        <div class="flex">
+                            <div class="flex-none h-12 w-32">
+                                ช่องทางการขายอื่นๆ
+                            </div>
+
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                                <input matInput placeholder="ระบุช่องทางการขายอื่น"
+                                    [formControlName]="'channal_remark'">
+                            </mat-form-field>
+
+
+                        </div>
+                    </ng-container>
+
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            ชื่อลูกค้า
+                        </div>
+                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                            <input matInput placeholder="ชื่อลูกค้า" [formControlName]="'name'">
+                        </mat-form-field>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            เบอร์โทรศัพท์
+                        </div>
+                        <!-- <div class="flex-initial w-full"> -->
+                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                            <input matInput placeholder="เบอร์โทรศัพท์" [formControlName]="'telephone'">
+                        </mat-form-field>
+                        <!-- </div> -->
+                    </div>
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            อีเมลล์
+                        </div>
+                        <!-- <div class="flex-initial w-full"> -->
+                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                            <input matInput placeholder="อีเมลล์" [formControlName]="'email'">
+                        </mat-form-field>
+                        <!-- </div> -->
+                    </div>
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            ที่อยู่
+                        </div>
+                        <!-- <div class="flex-initial w-full"> -->
+                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                            <textarea matInput placeholder="ที่อยู่" [formControlName]="'address'"></textarea>
+
+                        </mat-form-field>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="card2">
+                    การจัดส่ง
+
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            จัดส่งโดย
+                        </div>
+                        <mat-form-field class="flex-none h-12 w-32" style="width: 500px!important;">
+                            <mat-select [formControlName]="'delivery_by_id'">
+                                <mat-option value="">เลือกการจัดส่ง</mat-option>
+                                <mat-option *ngFor="let role of deliveryData" [value]="role.id">
+                                    {{role.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <BR>
+                    การชำระเงิน
+
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            ชำระโดย
+                        </div>
+                        <mat-form-field class="flex-none h-12 w-32" style="width: 250px!important;">
+                            <mat-select [formControlName]="'payment_type'">
+                                <mat-option value="">เลือกวิธีการชำระเงิน</mat-option>
+                                <mat-option *ngFor="let role of roleData" [value]="role.name">
+                                    {{role.des}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <BR>
+                    <ng-container *ngIf="formData.value.payment_type === 'transfer'">
+                        <div class="flex">
+                            <div class="flex-none h-12 w-32">
+                                สลิป
+                            </div>
+                            <div class="flex-none h-12 w-32">
+                                <ngx-dropzone style="width: 500px; height: 150px; justify-content: center;" (change)="onSelect($event)">
+                                    <ngx-dropzone-label>เลือกสลิป</ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f"
+                                        (removed)="onRemove(f)">
+                                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
+                            
+                        </div>
+                        <BR>
+                        <BR>
+                        <BR>
+                        <BR>
+                        <BR>
+                        <BR>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-32">
+                                เลือกธนาคาร
+                            </div>
+                            <mat-form-field class="flex-none h-12 w-32" style="width: 500px!important;">
+                                <mat-select [formControlName]="'bank_id'">
+                                    <mat-option value="">เลือกธนาคาร</mat-option>
+                                    <mat-option *ngFor="let role of bankData" [value]="role.id">
+                                        <!-- <div class="flex">    <img src="{{role.image}}" style="width: 5px; height: 5px;">  -->
+                                        {{role.account_number}} : {{role.first_name}} {{role.last_name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <BR>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-32">
+                                วันที่จ่ายเงิน
+                            </div>
+                            <div>
+                                <input class="form-control fc-datepicker hasDatepicker" placeholder="MM/DD/YYYY"
+                                    type="datetime-local" formControlName="payment_date"
+                                    style="width: 250px!important;" />
+                            </div>
+                            <div class="flex-none h-12 w-32" style="text-align: center;">
+                                จำนวนเงิน
+                            </div>
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" >
+                                <input type="number" matInput placeholder="จำนวนเงิน" [formControlName]="'payment_qty'" (change)="sumPrice()">
+                            </mat-form-field>
+                            <!-- <label class="col-md-3 form-label"><b style="color: red;">*</b>Start Date</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="18"
+                                                viewBox="0 0 24 24" width="18">
+                                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                                <path
+                                                    d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 2v3H4V5h16zM4 21V10h16v11H4z" />
+                                                <path d="M4 5.01h16V8H4z" opacity=".3" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <input class="form-control fc-datepicker hasDatepicker" placeholder="MM/DD/YYYY"
+                                        type="datetime-local" formControlName="payment_date" />
+                                </div>
+                            </div> -->
+
+                        </div>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-32">
+                                หมายเลขบัญชีผู้โอน
+                            </div>
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                                <input matInput placeholder="หมายเลขบัญชีผู้โอน" [formControlName]="'account_number'">
+                            </mat-form-field>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="flex p-5">
+
+            </div>
+            <div class="container">
+                <div class="card3">
+                    <div class="flex">
+                        <div class="flex-none h-12 w-32">
+                            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addOrder()">
+                                <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                เพิ่มสินค้า
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col" formArrayName="order">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full">
+                                        <thead class="border-b">
+                                            <tr>
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    #
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    รหัสสินค้า
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    สินค้า
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคา
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ส่วนลด(%)
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    จำนวน
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคาทั้งหมด
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                    จัดการ
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b" *ngFor="let depo; of: order().controls; let i = index"
+                                                [formGroupName]="i">
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    {{i +1}}</td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <input matInput [formControlName]="'item_id'"
+                                                        placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)" style="cursor: pointer;"
+                                                        readonly>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <input matInput [formControlName]="'item_name'"
+                                                        placeholder="ชื่อสินค้า" disabled
+                                                        readonly>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 100px!important;">
+                                                        <input type="number" matInput [formControlName]="'unit_price'" readonly (keypr)="OnchangeQty($event.value)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 100px!important;">
+                                                        <input type="number" matInput [formControlName]="'discount'" (change)="ChangeDiscount($event, i)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 100px!important;">
+                                                        <input type="number" matInput [formControlName]="'qty'" (change)="onchangeTotal($event, i)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 100px!important;">
+                                                        <input matInput [formControlName]="'total'" >
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <button class="px-6 ml-3" mat-flat-button (click)="removeOrder(i)">
+                                                        <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                        ลบ
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                       
+                  
+                    </div>
+                    <div class="card_sum ml-auto p-2 bd-highlight">
+                        <div class="flex">
+                            <div class="flex-none h-12 w-60">
+                                ภาษีมูลค่าเพิ่ม
+                            </div>
+                            <mat-form-field  class="w-3/12 pr-2 flex-initial w-full" style="width: 100px!important;">
+                                <input type="number" matInput placeholder="ภาษีมูลค่าเพิ่ม"
+                                    [formControlName]="'vat'" (change)="sumPrice()">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-60" >
+                                ค่าบริการเก็บเงินปลายทาง(COD)
+                            </div>
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100px!important;">
+                                <input type="number" matInput placeholder="ค่าบริการเก็บเงินปลายทาง(COD)"
+                                    [formControlName]="'cod_price_surcharge'" (change)="sumPrice()">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-60">
+                                ค่าขนส่ง
+                            </div>
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100px!important;">
+                                <input type="number" matInput placeholder="ค่าขนส่ง"
+                                    [formControlName]="'shipping_price'" (change)="sumPrice()">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-60">
+                                ส่วนลด
+                            </div>
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100px!important;">
+                                <input type="number" matInput placeholder="ค่าขนส่ง"
+                                    [formControlName]="'main_discount'" (change)="sumPrice()">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-none h-12 w-60">
+                               ราคาทั้งหมด
+                            </div>
+                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100px!important;">
+                                <input type="number" matInput placeholder="ราคาทั้งหมด"
+                                    [formControlName]="'total'" readonly >
+                            </mat-form-field>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="sale-order/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="newSaleOrder()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+        <pre>
+        </pre>
+    </div>
+    <div>
+        <!-- check : {{this.formData.value | json}} -->
+    </div>
+</div>

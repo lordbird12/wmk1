@@ -1,0 +1,95 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    จองศาลา
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form [formGroup]="formData">
+            <div class="w-full">
+                <div class="flex flex-auto flex-wrap">
+                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                        <div class="flex p-5">
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>เลิอกวันที่จองศาลา</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                    <input matStartDate [formControlName]="'fdate'" placeholder="วันที่เริ่ม">
+                                    <input matEndDate [formControlName]="'edate'" placeholder="วันที่สิ้นสุด">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>เลือกศาลา</mat-label>
+                                <mat-select [formControlName]="'sala_id'">
+                                    <mat-option [value]="">
+                                        เลือกศาลา
+                                    </mat-option>
+                                    <mat-option *ngFor="let role of salaData" [value]="role.id">
+                                        {{role.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="flex p-5">
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>ชื่อผู้ติดต่อ</mat-label>
+                                <input matInput [formControlName]="'name'" placeholder="ระบุชื่อผู้ติดต่อ">
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>อีเมล</mat-label>
+                                <input matInput [formControlName]="'email'" placeholder="ระบุชื่อผู้ติดต่อ">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="flex p-5">
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>เบอร์ติดต่อ</mat-label>
+                                <input matInput [formControlName]="'tel'">
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>เลขประจำตัวผู้เสียภาษี</mat-label>
+                                <input matInput [formControlName]="'tax_id'" placeholder="เลขประจำตัวผู้เสียภาษี">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex p-5 w-full">
+                            <mat-form-field class="w-6/12 pr-2">
+                                <mat-label>รายละเอียด</mat-label>
+                                <textarea matInput rows="4" [formControlName]="'remark'"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex p-5 w-full">
+                            <mat-form-field class="w-6/12 pr-2">
+                                <mat-label>ที่อยู่ผู้จอง</mat-label>
+                                <textarea matInput rows="4" [formControlName]="'address'"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="sala/list-reserve">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addMonk()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+    </div>

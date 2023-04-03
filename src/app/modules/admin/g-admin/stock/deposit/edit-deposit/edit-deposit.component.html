@@ -1,0 +1,203 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขใบยืมของ
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex">
+                <div class="w-full">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg font-extrabold leading-6 text-gray-900">รายละเอียดสามาชิก</h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">รายละเอียดสมาชิก</p>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg font-extrabold leading-6 text-gray-900">รายละเอียดการยืม</h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">รายละเอียดการยืม</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+
+                <div class="w-full">
+                    <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid"
+                        [formGroup]="formCustomer">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">ชื่อ</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'fname'" placeholder="กรุณาระบุชื่อ">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">นามสกุล</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'lname'" placeholder="กรุณาระบุนามสกุล">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">อีเมล</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'email'" placeholder="กรุณาระบุอีเมล">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">เบอร์ติดต่อ</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'tel'" placeholder="ระบุเบอร์ติดต่อ">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">เลขประจำตัวผู้เสียภาษี</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'tel'"
+                                                placeholder="เลขประจำตัวผู้เสียภาษี">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">ที่อยู่ผู้ยืม</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <textarea matInput rows="4" [formControlName]="'address'"
+                                                placeholder="กรุณาระบุที่อยู่"></textarea>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="w-full">
+                    <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid"
+                        [formGroup]="formData">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">วันที่ยืม</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-date-range-input [rangePicker]="picker">
+                                                <input matStartDate [formControlName]="'fdate'" placeholder="วันที่ยืม">
+                                                <input matEndDate [formControlName]="'edate'" placeholder="วันที่คืน">
+                                            </mat-date-range-input>
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-date-range-picker #picker></mat-date-range-picker>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-extrabold text-gray-500">รายละเอียด</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <textarea matInput rows="4" [formControlName]="'remark'"
+                                                placeholder="รายละเอียด"></textarea>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <div class="flex flex-col">
+                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="overflow-hidden">
+                                            <table class="min-w-full" formArrayName="withdraw_item_lines">
+                                                <thead class="border-b">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="text-md font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            #
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-md font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ชื่ออุปกรณ์
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-md font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            รายละเอียด
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-md font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            จำนวน
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b"
+                                                        *ngFor="item; of: withdraw_item_lines().controls; let i = index"
+                                                        [formGroupName]="i">
+                                                        <td
+                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                            <mat-checkbox formControlName="check">
+                                                            </mat-checkbox>
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{this.itemData[i].name}}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            {{this.itemData[i].remark}}
+                                                        </td>
+                                                        <td
+                                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-full">
+                                                                <input matInput placeholder="จำนวน"
+                                                                    [formControlName]="'qty'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center justify-end w-full px-8 py-4">
+        <div class="flex items-center justify-end">
+            <a class="ml-4" mat-flat-button href="deposit/list-withdraw">
+                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                ยกเลิก
+            </a>
+            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="updateWithdraw()">
+                <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                ยืนยัน
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,172 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate ">
+                    รายละเอียดการทำธุรกรรม
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg py-5">
+            <div class="flex">
+                <div class="w-full">
+                    <div class="px-4 py-5 sm:px-6 bg-gray-50">
+                        <h3 class="text-lg font-extrabold leading-6 text-gray-900">วัดมงคลโคธาวาส</h3>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500">รายละเอียดการทำธุรกรรม</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="flex">
+                <div class="w-full">
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">ชื่อบัญชี</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"> {{this.bankData.name}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">เลขที่บัญชี</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">[{{this.bankData.bank_of}}] {{this.bankData.number}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">รายละเอียดบัญชี</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.bankData.description}}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <form [formGroup]="formData">
+            <div class="overflow-x-auto relative">
+                <div class="flex">
+                    <div class="flex flex-col w-full lg:w-3/4 sm:pl-8">
+                        <mat-form-field class="w-full pr-2">
+                            <mat-label class="font-bold">ค้นหาข้อมูล</mat-label>
+                            <input matInput placeholder="ค้นหน้าข้อมูล" (keyup)="onFilter($event)" [formControlName]="'filter'">
+                        </mat-form-field>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-1/4 sm:pl-8">
+                        <mat-form-field class="w-full pr-2">
+                            <mat-label class="font-bold">เลือกประเภทบัญชี</mat-label>
+                            <mat-select [formControlName]="'type'" (selectionChange)="onFilter1($event)">
+                                <mat-option [value]="''">
+                                    <span>เลือกประเภทบัญชี</span>
+                                </mat-option>
+                                <mat-option [value]="'deposit'">
+                                    <span>รายการฝากเงิน</span>
+                                </mat-option>
+                                <mat-option [value]="'withdraw'">
+                                    <span>รายการถอนเงิน</span>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="overflow-x-auto relative">
+            <div class="flex">
+                <div class="w-full">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 heroicons_solid row-border hover">
+                        <thead class="text-m text-gray-700 uppercase bg-gray-50 dark:bg-white-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 ">
+                                    ลำดับ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ประเภทการทำธุรกรรม
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    จำนวนเงิน
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    รายละเอียด
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    วันที่
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ผู้บันทึก
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    รูปหลักฐาน
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    รายละเอียด
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="this.bankData.bank_trans?.length != 0">
+                            <tr *ngFor="let item of this.bankData.bank_trans; let i = index" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                <td class="py-4 px-6">{{ i+1 }}</td>
+                                <td class="py-4 px-6">
+                                    <div *ngIf="item.type === 'deposit'"> ฝากเงิน</div>
+                                    <div *ngIf="item.type === 'withdraw'"> ถอนเงิน</div>
+
+                                </td>
+                                <td class="py-4 px-6">{{item.price | currency:" ":"symbol"}}</td>
+
+                                <td class="py-4 px-6">{{item.remark}}</td>
+
+                                <td class="py-4 px-6">{{item.created_at}}</td>
+
+                                <td class="py-4 px-6">{{item.create_by}}</td>
+
+                                <td class="py-4 px-6">
+                                    <button mat-button (click)="showPicture(item.images[0].image)">
+                                        <mat-icon>image</mat-icon>
+                                    </button>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <a routerLink="/bank/view-transaction/{{item.id}}" mat-icon-button>
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'">
+                                        </mat-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="this.bankData.bank_trans?.length == 0">
+                            <tr>
+                                <td colspan="4">No Data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="bank/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ปิด
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

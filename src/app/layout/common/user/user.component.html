@@ -1,0 +1,29 @@
+<!-- Button -->
+<button mat-icon-button [matMenuTriggerFor]="userActions">
+    <span class="relative">
+        <!-- <img class="w-7 h-7 rounded-full" src="assets/images/avartars/brian-hughes.jpg"> -->
+        <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+        <span class="absolute right-0 bottom-0 w-2 h-2 rounded-full bg-green-500"></span>
+    </span>
+</button>
+
+<mat-menu [xPosition]="'before'" #userActions="matMenu">
+    <button mat-menu-item>
+        <span class="flex flex-col leading-none">
+            <span>เข้าสู่ระบบโดย</span>
+            <span class="mt-1.5 text-md font-medium">{{user.email}}</span>
+        </span>
+    </button>
+    <mat-divider class="my-2"></mat-divider>
+
+    <a href="http://localhost:4200/user/profile" mat-menu-item>
+        <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+        <span>โปรไฟล์</span>
+    </a>
+
+    <mat-divider class="my-2"></mat-divider>
+    <button mat-menu-item (click)="signOut()">
+        <mat-icon [svgIcon]="'heroicons_outline:logout'"></mat-icon>
+        <span>ออกจากระบบ</span>
+    </button>
+</mat-menu>

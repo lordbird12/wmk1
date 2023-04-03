@@ -1,0 +1,140 @@
+<div mat-dialog-title>
+    <h3 mat-dialog-titleclass="modal-title" id="exampleModalLabel" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+        ค้นหาอุปกรณ์
+    </h3>
+</div>
+&nbsp;
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-100 sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <form [formGroup]="formData">
+                        <div class="mb-6">
+                            <label for="base-input"
+                                class="block mb-2 text-lg font-extrabold text-gray-900 dark:text-gray-300">ค้นหาสินค้า</label>
+                            <input type="text" id="base-input" (keyup)="onFilter($event)" formControlName="filter"
+                                placeholder="ค้นหาสินค้า"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gold-500 focus:border-gold-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gold-500 dark:focus:border-gold-500">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8" *ngIf="this.formData.value.filter !== ''">
+                <div class="overflow-hidden">
+                    <table class="min-w-full">
+                        <thead class="border-b">
+                            <tr>
+                                <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                    #
+                                </th>
+                                <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                    ชื่ออุปกรณ์
+                                </th>
+                                <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                    สถานที่จัดเก็บ
+                                </th>
+                                <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                    จำนวนคงเหลือ
+                                </th>
+
+                                <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                    จัดการ
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b" *ngFor="let product of rawData; let k = index">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{k+1}}</td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {{product.name}}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {{product.location_name}}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    {{product.qty}}
+                                </td>
+
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addProduct(product)">
+                                        <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                        เพิ่มสินค้า
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            &nbsp;
+            <!-- <form [formGroup]="formData1">
+                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8" formArrayName="item">
+                    <div class="overflow-hidden">
+                        <table class="min-w-full">
+                            <thead class="border-b">
+                                <tr>
+                                    <th scope="col" class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                        ชื่อสินค้า
+                                    </th>
+                                    <th scope="col" class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                        จำนวนคงเหลือ
+                                    </th>
+                                    <th scope="col" class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                        ราคา
+                                    </th>
+                                    <th scope="col" class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                        จัดการ
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tbody>
+                                <tr class="border-b" *ngFor="let depo; of: item().controls; let i = index"
+                                    [formGroupName]="i">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{i +1}}</td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <input matInput [formControlName]="'item_id'">
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <input matInput [formControlName]="'item_name'">
+                                    </td>
+
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <input matInput [formControlName]="'qty'">
+                                    </td>
+
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <button class="px-6 ml-3" mat-flat-button (click)="removeItem(i)">
+                                            <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                            ลบ
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form> -->
+
+            <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                <div class="flex items-center justify-end">
+
+                    <button class="px-6 ml-3 mat-sec" mat-flat-button (click)="onClose()">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </button>
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="onSubmit()">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

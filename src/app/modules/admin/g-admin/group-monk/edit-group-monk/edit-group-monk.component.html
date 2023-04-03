@@ -1,0 +1,144 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขข้อมูลกลุ่มพระสงฆ์
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form [formGroup]="formData">
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    ชื่อกลุ่มพระสงฆ์
+                </div>
+                <div class="flex-initial w-full">
+                    <mat-form-field class="w-2/6 pr-2">
+                        <input matInput [formControlName]="'name'" placeholder="กรุณาระบุชื่อกลุ่ม">
+                    </mat-form-field>
+                </div>
+            </div>
+            &nbsp;
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    รายละเอียด
+                </div>
+                <div class="flex-initial w-full">
+                    <mat-form-field class="w-2/6 pr-2">
+                        <textarea matInput rows="4" [formControlName]="'description'"
+                            placeholder="กรุณาระบุรายละเอียด"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            &nbsp;
+            <!-- <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addMonk()">
+                        <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                        เพิ่มพระ
+                    </button>
+                </div>
+            </div> -->
+            <!-- <div>
+                <div class="flex flex-col" formArrayName="group_monk">
+                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="overflow-hidden">
+                                <table class="min-w-full">
+                                    <thead class="border-b">
+                                        <tr>
+                                            <th scope="col"
+                                                class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                #
+                                            </th>
+
+                                            <th scope="col"
+                                                class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                ชื่ออุปกรณ์
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                จุดเก็บอุปกรณ์
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                จำนวนคงเหลือ
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                จำนวน
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                จัดการ
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b" *ngFor="let depo; of: group_monk().controls; let i = index"
+                                            [formGroupName]="i">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                {{i +1}}</td>
+
+                                            <td class="text-sm text-black-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <input matInput [formControlName]="'item_id'" hidden>
+                                                <input matInput [formControlName]="'item_name'" readonly
+                                                    placeholder="คลิกเพื่อเพิ่มอุปกรณ์ " (click)="openDialog(i)">
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <input matInput [formControlName]="'location_id'" hidden>
+                                                <input matInput [formControlName]="'location_name'" readonly>
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+
+                                                <input matInput [formControlName]="'qty_raw'">
+
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <mat-form-field class="w-32 pr-2">
+                                                    <input matInput [formControlName]="'qty'">
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <button class="px-6 ml-3" mat-flat-button (click)="removeMonk(i)">
+                                                    <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                    ลบ
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </form>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="item/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="updateGroupMonk()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+        <pre>
+        </pre>
+    </div>
+    <div>
+        <!-- check : {{this.formData.value | json}} -->
+    </div>
+</div>

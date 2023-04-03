@@ -1,0 +1,154 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการธุรกรรม</div>
+        <!-- Actions -->
+    </div>
+
+    <!-- search -->
+    <div class="flex-auto" style="overflow-y: auto; padding-bottom: 4rem !important;">
+        <form class="flex flex-col p-5 pt-4 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="filterForm">
+            <div class="flex flex-col sm:flex-row">
+                <div class="w-full">
+                    <div class="flex flex-auto flex-wrap">
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-4">
+                            <mat-form-field class="w-full">
+                                <mat-select [formControlName]="'bank_id'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกบัญชีธนาคาร</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let account of bankData" [value]="account.id">
+                                        {{account.name}} [{{account.bank_of}}]
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-4">
+                            <mat-form-field class="w-full">
+                                <mat-select [formControlName]="'type'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกประเภทบัญชี</span>
+                                    </mat-option>
+                                    <mat-option [value]="'deposit'">
+                                        <span>รายการฝากเงิน</span>
+                                    </mat-option>
+                                    <mat-option [value]="'withdraw'">
+                                        <span>รายการถอนเงิน</span>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-4">
+                            <mat-form-field class="w-full">
+                                <input readonly [formControlName]="'start_date'" matInput [matDatepicker]="picker_start_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker_start_date"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_start_date></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-4">
+                            <mat-form-field class="w-full">
+                                <input readonly [formControlName]="'end_date'" matInput [matDatepicker]="picker_end_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker_end_date"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_end_date></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-4">
+                            <mat-form-field class="w-full">
+                                <input matInput placeholder="ค้นหน้าข้อมูล" [formControlName]="'text'">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-4 sm:pr-4">
+                            <button mat-stroked-button class="w-full" style="min-height: 48px;" (click)="onFilter()">
+                                ค้นหา
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <!-- Products list -->
+        <div class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto">
+            <div class="row">
+                <div class="col mb-4 text-right">
+                    <label>บันทึกไฟล์ข้อมูล  </label>
+                    <button type="button" class="btn btn-danger" mat-flat-button (click)="genPDF()">
+                        <i class="fa fa-file-pdf"> PDF</i>
+                    </button> &nbsp;
+                    <button type="button" class="btn btn-success" mat-flat-button (click)="genExcel()">
+                        <i class="fa fa-file-excel"> Excel</i>
+                    </button>
+                </div>
+            </div>
+            <div style="overflow-y: auto; padding-bottom: 4rem !important;">
+                <table datatable [dtOptions]="dtOptions" class="table row-border hover" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ลำดับ</th>
+                            <th>ชื่อบัญชี</th>
+                            <th>ประเภทการทำธุรกรรม</th>
+                            <th>จำนวนเงิน</th>
+                            <th>สร้างโดย</th>
+                            <th>วันที่สร้าง</th>
+                            <th>จัดการ</th>
+                            <th>พิมพ์</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="dataRow?.length != 0">
+                        <tr *ngFor="let item of dataRow; let i = index">
+                            <td>{{ pages.begin + (i + 1) }}</td>
+                            <td style="width: 25%;">{{ item.bank.name }} [{{item.bank.bank_of}}]</td>
+
+                            <td style="width: 15%;">
+                                <div *ngIf="item.type === 'deposit'"> ฝากเงิน [{{item.type}}]</div>
+                                <div *ngIf="item.type === 'withdraw'"> ถอนเงิน [{{item.type}}]</div>
+                            </td>
+                            <td>{{item.price | currency:" ":"symbol"}}</td>
+                            <td>{{ item.create_by }}</td>
+                            <td>{{ item.created_at }}</td>
+                            <td style="width: 10%;">
+                                <button mat-button (click)="edit(item)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <!-- <button mat-button (click)="approve(item.id)">
+                                <mat-icon>visibility</mat-icon>
+                            </button> -->
+                            </td>
+                            <td style="width: 10%;">
+                                <button *ngIf="item.type === 'deposit'" mat-button (click)="print(item.id)">
+                                    <mat-icon>print</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="dataRow?.length == 0">
+                        <tr>
+                            <td colspan="8" class="no-data-available text-center"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td style="width: 25%;"></td>
+                            <td><b>ยอดรวมรายการ</b></td>
+                            <td><b>{{this.totalRowSummary | currency:" ":"symbol"}}</b></td>
+                            <td></td>
+                            <td style="width: 10%;"></td>
+                            <td style="width: 10%;"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
