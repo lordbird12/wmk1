@@ -15,6 +15,7 @@ import { appRoutes } from 'app/app.routing';
 import { MillionPipe } from './million.pipe';
 import { DecimalPipe } from '@angular/common';
 
+
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled'
@@ -23,6 +24,7 @@ const routerConfig: ExtraOptions = {
 @NgModule({
     declarations: [
         AppComponent,
+
     ],
     imports: [
         BrowserModule,

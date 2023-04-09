@@ -46,7 +46,7 @@
                             {{item.status}}
                         </td>
                         <td>{{ item.create_by }}</td>
-                        <td>{{ item.created_at }}</td>
+                        <td>{{ item.created_at | date : 'dd-MM-yyyy hh:mm a ' }}</td>
                         <td>
                             <button mat-button (click)="edit(item.id)">
                                 <mat-icon>edit</mat-icon>

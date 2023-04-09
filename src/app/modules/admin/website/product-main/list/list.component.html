@@ -45,7 +45,7 @@
                         <td>{{ item.text_desc }}</td>
                         <td>{{ item.type_detail.name }}</td>
                         <td>Admin</td>
-                        <td>{{ item.created_at }}</td>
+                        <td>{{ item.created_at | date : 'dd-MM-yyyy hh:mm a ' }}</td>
                         <td>
                             <button mat-button (click)="showPicture(item.image)">
                                 <mat-icon>image</mat-icon>

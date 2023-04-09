@@ -250,7 +250,31 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._Service.updateItem(formData).subscribe(
                     {
                         next: (resp: any) => {
-                            this._router.navigateByUrl('item/list').then(() => { })
+                            this._fuseConfirmationService.open({
+                                "title": "แก้ไขข้อมูลอุปกรณ์",
+                                "message": "บันทึกเรียบร้อย",
+                                "icon": {
+                                    "show": true,
+                                    "name": "heroicons_outline:check-circle",
+                                    "color": "success"
+                                },
+                                "actions": {
+                                    "confirm": {
+                                        "show": false,
+                                        "label": "ตกลง",
+                                        "color": "primary"
+                                    },
+                                    "cancel": {
+                                        "show": false,
+                                        "label": "ยกเลิก"
+                                    }
+                                },
+                                "dismissible": true
+                            }).afterClosed().subscribe((res) => {
+    
+                                this._router.navigateByUrl('item/list')
+                            })
+                         
                         },
                         error: (err: any) => {
 

@@ -1,9 +1,34 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
+import {
+    FormArray,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    RequiredValidator,
+    Validators,
+} from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { debounceTime, lastValueFrom, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+    debounceTime,
+    lastValueFrom,
+    map,
+    merge,
+    Observable,
+    Subject,
+    switchMap,
+    takeUntil,
+} from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,15 +51,13 @@ import { MemberService } from '../../../member/member.service';
     selector: 'edit-deposit',
     templateUrl: './edit-deposit.component.html',
     styleUrls: ['./edit-deposit.component.scss'],
-    animations: fuseAnimations
+    animations: fuseAnimations,
 })
-
 export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
-
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
-    formData: FormGroup
+    formData: FormGroup;
     flashErrorMessage: string;
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
@@ -73,17 +96,15 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
         private _Service: DepositService,
-        private _ServiceMember: MemberService,
-
+        private _ServiceMember: MemberService
     ) {
-
         this.formCustomer = this._formBuilder.group({
             fname: '',
             lname: '',
             email: '',
             tel: '',
             address: '',
-        })
+        });
 
         this.formData = this._formBuilder.group({
             member_id: '',
@@ -91,12 +112,9 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
             edate: ['', Validators.required],
             remark: ['', Validators.required],
             status: 'Request',
-            withdraw_item_lines: this._formBuilder.array([
-            ])
-        })
-
+            withdraw_item_lines: this._formBuilder.array([]),
+        });
     }
-
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
@@ -108,17 +126,21 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
     async ngOnInit(): Promise<void> {
         this.depositId = this._activatedRoute.snapshot.paramMap.get('id');
 
-        const withdraw = await lastValueFrom(this._Service.getWithdrowById(this.depositId))
-        this.withdrawData = withdraw.data
-        console.log('เบิก', this.withdrawData)
+        const withdraw = await lastValueFrom(
+            this._Service.getWithdrowById(this.depositId)
+        );
+        this.withdrawData = withdraw.data;
+        console.log('เบิก', this.withdrawData);
 
-        const item = await lastValueFrom(this._Service.getItem())
-        this.itemData = item.data
-        console.log('ไอเทม', this.itemData)
+        const item = await lastValueFrom(this._Service.getItem());
+        this.itemData = item.data;
+        console.log('ไอเทม', this.itemData);
 
-        const member = await lastValueFrom(this._Service.getMemberById(this.withdrawData.member_id))
-        this.memberData = member.data
-        console.log('เมมเบอร์', this.memberData)
+        const member = await lastValueFrom(
+            this._Service.getMemberById(this.withdrawData.member_id)
+        );
+        this.memberData = member.data;
+        console.log('เมมเบอร์', this.memberData);
         this.formCustomer.patchValue({
             id: this.memberData.id ?? '',
             fname: this.memberData.fname ?? '',
@@ -126,7 +148,7 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
             email: this.memberData.email ?? '',
             tel: this.memberData.tel ?? '',
             address: this.memberData.address ?? '',
-        })
+        });
 
         this.formData.patchValue({
             member_id: this.withdrawData.member_id ?? '',
@@ -134,30 +156,27 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
             edate: this.withdrawData.edate ?? '',
             remark: this.withdrawData.remark ?? '',
             status: 'Request',
-        })
+        });
 
-        this.itemData.map(element => {
-            this.withdraw_item_lines().push(this._formBuilder.group({
-                check: false,
-                item_id: element.id,
-                qty: element.qty
-            }))
+        this.itemData.map((element) => {
+            this.withdraw_item_lines().push(
+                this._formBuilder.group({
+                    check: false,
+                    item_id: element.id,
+                    qty: element.qty,
+                })
+            );
             let itemData = this.formData.value.withdraw_item_lines;
             for (let i = 0; i < this.itemData.length; i++) {
                 if (this.itemData[i].id === 2) {
-
                     itemData[i] = {
                         check: true,
-                        qty: this.withdrawData.withdraw_item_lines[i].qty
-                    }
-
-                } 
+                        qty: this.withdrawData.withdraw_item_lines[i].qty,
+                    };
+                }
             }
-            this.formData.controls.withdraw_item_lines.patchValue(
-                itemData
-            );
-
-        })
+            this.formData.controls.withdraw_item_lines.patchValue(itemData);
+        });
         // this.withdrawData.withdraw_item_lines.map(element => {
         //     this.withdraw_item_lines().push(this._formBuilder.group({
         //         check: false,
@@ -168,8 +187,7 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     withdraw_item_lines(): FormArray {
-        return this.formData.get('withdraw_item_lines') as FormArray
-
+        return this.formData.get('withdraw_item_lines') as FormArray;
     }
 
     NewItem(): FormGroup {
@@ -182,7 +200,7 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
 
     addItem(): void {
         this.withdraw_item_lines().push(this.NewItem());
-        console.log(this.formData.value)
+        console.log(this.formData.value);
         // alert(1)
     }
 
@@ -199,8 +217,8 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
         });
 
         // ปิด Dialog พร้อมรับค่า result
-        dialogRef.afterClosed().subscribe(item => {
-            console.log(item)
+        dialogRef.afterClosed().subscribe((item) => {
+            console.log(item);
             itemData[i] = {
                 item_id: item.id,
                 item_name: item.name,
@@ -208,15 +226,12 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
                 qty: '',
                 location_id: item.location_id,
                 location_name: item.location_name,
-            }
+            };
             if (item) {
-                this.formData.controls.deposit.patchValue(
-                    itemData
-                );
+                this.formData.controls.deposit.patchValue(itemData);
             }
         });
     }
-
 
     /**
      * After view init
@@ -233,163 +248,146 @@ export class EditDepositComponent implements OnInit, AfterViewInit, OnDestroy {
         this.addItem();
     }
 
-
     updateWithdraw(): void {
-
-
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
- 
-       
-            const confirmation = this._fuseConfirmationService.open({
-                "title": "แก้ไข",
-                "message": "คุณต้องการสร้างใบรับเข้าสินค้าใช่หรือไม่ ",
-                "icon": {
-                    "show": false,
-                    "name": "heroicons_outline:exclamation",
-                    "color": "warning"
-                },
-                "actions": {
-                    "confirm": {
-                        "show": true,
-                        "label": "ยืนยัน",
-                        "color": "primary"
-                    },
-                    "cancel": {
-                        "show": true,
-                        "label": "ยกเลิก"
-                    }
-                },
-                "dismissible": true
-            });
-            confirmation.afterClosed().subscribe((result) => {
 
-                // If the confirm button pressed...
-                if (result === 'confirmed') {
-                    let formValueCustomer = this.formCustomer.value
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'แก้ไข',
+            message: 'คุณต้องแก้ไขใบยืมอุปกรณ์ใช่หรือไม่ ',
+            icon: {
+                show: false,
+                name: 'heroicons_outline:exclamation',
+                color: 'warning',
+            },
+            actions: {
+                confirm: {
+                    show: true,
+                    label: 'ยืนยัน',
+                    color: 'primary',
+                },
+                cancel: {
+                    show: true,
+                    label: 'ยกเลิก',
+                },
+            },
+            dismissible: true,
+        });
+        confirmation.afterClosed().subscribe((result) => {
+            // If the confirm button pressed...
+            if (result === 'confirmed') {
+                let formValueCustomer = this.formCustomer.value;
 
-                    this._ServiceMember.updateMember(formValueCustomer, this.memberData.id).subscribe({
+                this._ServiceMember
+                    .updateMember(formValueCustomer, this.memberData.id)
+                    .subscribe({
                         next: (resp: any) => {
                             const formValue = this.formData.value;
                             if (formValue.edate._i) {
-                                let datestart = formValue.fdate._i.year + '-' + formValue.fdate._i.month + '-' + formValue.fdate._i.date;
-                                formValue.fdate = datestart
-                                let datestop = formValue.edate._i.year + '-' + formValue.edate._i.month + '-' + formValue.edate._i.date;
-                                formValue.edate = datestop
+                                let datestart =
+                                    formValue.fdate._i.year +
+                                    '-' +
+                                    formValue.fdate._i.month +
+                                    '-' +
+                                    formValue.fdate._i.date;
+                                formValue.fdate = datestart;
+                                let datestop =
+                                    formValue.edate._i.year +
+                                    '-' +
+                                    formValue.edate._i.month +
+                                    '-' +
+                                    formValue.edate._i.date;
+                                formValue.edate = datestop;
                             }
 
-                            console.log(formValue);
-                            this._Service.updateWithdraw(formValue, this.depositId).subscribe({
-                                next: (resp: any) => {
-                                    this._fuseConfirmationService.open({
-                                        "title": "แก้ไขข้อมูล",
-                                        "message": "บันทึกเรียบร้อย",
-                                        "icon": {
-                                            "show": true,
-                                            "name": "heroicons_outline:check-circle",
-                                            "color": "success"
-                                        },
-                                        "actions": {
-                                            "confirm": {
-                                                "show": false,
-                                                "label": "ตกลง",
-                                                "color": "primary"
-                                            },
-                                            "cancel": {
-                                                "show": false,
-                                                "label": "ยกเลิก"
-                                            }
-                                        },
-                                        "dismissible": true
-                                    }).afterClosed().subscribe((res) => {
-            
-                                        this.ngOnInit();
-                                    })
-            
-                                },
-                                error: (err: any) => {
-
-                                    this._fuseConfirmationService.open({
-                                        "title": "กรุณาระบุข้อมูล",
-                                        "message": err.error.message,
-                                        "icon": {
-                                            "show": true,
-                                            "name": "heroicons_outline:exclamation",
-                                            "color": "warning"
-                                        },
-                                        "actions": {
-                                            "confirm": {
-                                                "show": false,
-                                                "label": "ยืนยัน",
-                                                "color": "primary"
-                                            },
-                                            "cancel": {
-                                                "show": false,
-                                                "label": "ยกเลิก",
-
-                                            }
-                                        },
-                                        "dismissible": true
-                                    });
-                                    console.log(err.error.message)
-                                }
-                            })
-
-
-                            this._fuseConfirmationService.open({
-                                "title": "แก้ไขข้อมูลสมาชิก",
-                                "message": "บันทึกเรียบร้อย",
-                                "icon": {
-                                    "show": true,
-                                    "name": "heroicons_outline:check-circle",
-                                    "color": "success"
-                                },
-                                "actions": {
-                                    "confirm": {
-                                        "show": false,
-                                        "label": "ตกลง",
-                                        "color": "primary"
+                            this._Service
+                                .updateWithdraw(formValue, this.depositId)
+                                .subscribe({
+                                    next: (resp: any) => {
+                                        this._fuseConfirmationService
+                                            .open({
+                                                title: 'แก้ไขข้อมูล',
+                                                message: 'บันทึกเรียบร้อย',
+                                                icon: {
+                                                    show: true,
+                                                    name: 'heroicons_outline:check-circle',
+                                                    color: 'success',
+                                                },
+                                                actions: {
+                                                    confirm: {
+                                                        show: false,
+                                                        label: 'ตกลง',
+                                                        color: 'primary',
+                                                    },
+                                                    cancel: {
+                                                        show: false,
+                                                        label: 'ยกเลิก',
+                                                    },
+                                                },
+                                                dismissible: true,
+                                            })
+                                            .afterClosed()
+                                            .subscribe((res) => {
+                                                this._router
+                                                    .navigateByUrl(
+                                                        'deposit/list'
+                                                    )
+                                                    .then(() => {});
+                                            });
                                     },
-                                    "cancel": {
-                                        "show": false,
-                                        "label": "ยกเลิก"
-                                    }
-                                },
-                                "dismissible": true
-                            }).afterClosed().subscribe((res) => {
-
-                                this.ngOnInit();
-                            })
+                                    error: (err: any) => {
+                                        this._fuseConfirmationService.open({
+                                            title: 'กรุณาระบุข้อมูล',
+                                            message: err.error.message,
+                                            icon: {
+                                                show: true,
+                                                name: 'heroicons_outline:exclamation',
+                                                color: 'warning',
+                                            },
+                                            actions: {
+                                                confirm: {
+                                                    show: false,
+                                                    label: 'ยืนยัน',
+                                                    color: 'primary',
+                                                },
+                                                cancel: {
+                                                    show: false,
+                                                    label: 'ยกเลิก',
+                                                },
+                                            },
+                                            dismissible: true,
+                                        });
+                                        console.log(err.error.message);
+                                    },
+                                });
                         },
                         error: (err: any) => {
-
                             this._fuseConfirmationService.open({
-                                "title": "กรุณาระบุข้อมูล",
-                                "message": err.error.message,
-                                "icon": {
-                                    "show": true,
-                                    "name": "heroicons_outline:exclamation",
-                                    "color": "warning"
+                                title: 'กรุณาระบุข้อมูล',
+                                message: err.error.message,
+                                icon: {
+                                    show: true,
+                                    name: 'heroicons_outline:exclamation',
+                                    color: 'warning',
                                 },
-                                "actions": {
-                                    "confirm": {
-                                        "show": false,
-                                        "label": "ยืนยัน",
-                                        "color": "primary"
+                                actions: {
+                                    confirm: {
+                                        show: false,
+                                        label: 'ยืนยัน',
+                                        color: 'primary',
                                     },
-                                    "cancel": {
-                                        "show": false,
-                                        "label": "ยกเลิก",
-
-                                    }
+                                    cancel: {
+                                        show: false,
+                                        label: 'ยกเลิก',
+                                    },
                                 },
-                                "dismissible": true
+                                dismissible: true,
                             });
-                            console.log(err.error.message)
-                        }
-                    })
-                }
-            });
+                            console.log(err.error.message);
+                        },
+                    });
+            }
+        });
     }
 }

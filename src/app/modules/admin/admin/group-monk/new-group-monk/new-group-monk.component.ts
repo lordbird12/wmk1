@@ -136,7 +136,7 @@ export class NewGroupMonkComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.formData.invalid) {
             this._fuseConfirmationService.open({
                 "title": "กรอกข้อมูลให้ครบถ้วน",
-                "message": "คุณต้องการสร้างใบรับเข้าสินค้าใช่หรือไม่ ",
+                "message": "ข้อมูลการสร้างกลุ่มสำหรับพระสงฆ์ไม่ครบถ้วน ",
                 "icon": {
                     "show": false,
                     "name": "heroicons_outline:exclamation",

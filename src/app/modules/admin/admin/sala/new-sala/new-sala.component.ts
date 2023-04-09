@@ -142,7 +142,7 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.formData.invalid) {
             this._fuseConfirmationService.open({
                 "title": "กรอกข้อมูลให้ครบถ้วน",
-                "message": "คุณต้องการสร้างใบรับเข้าสินค้าใช่หรือไม่ ",
+                "message": "ข้อมูลการสร้างศาลาไม่ครบถ้วน",
                 "icon": {
                     "show": false,
                     "name": "heroicons_outline:exclamation",
@@ -164,7 +164,7 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         else {
             const confirmation = this._fuseConfirmationService.open({
-                "title": "สร้างศาลาใหม่",
+                "title": "สร้างการจองศาลาใหม่",
                 "message": "คุณต้องการสร้างศาลาใหม่ใช่หรือไม่",
                 "icon": {
                     "show": false,
@@ -200,8 +200,31 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
                     );
                     this._Service.newSala(formData).subscribe({
                         next: (resp: any) => {
-                            this._router.navigateByUrl('sala/list').then(() => {
+                            this._fuseConfirmationService.open({
+                                "title": "สร้างศาลา",
+                                "message": "บันทึกเรียบร้อย",
+                                "icon": {
+                                    "show": true,
+                                    "name": "heroicons_outline:check-circle",
+                                    "color": "success"
+                                },
+                                "actions": {
+                                    "confirm": {
+                                        "show": false,
+                                        "label": "ตกลง",
+                                        "color": "primary"
+                                    },
+                                    "cancel": {
+                                        "show": false,
+                                        "label": "ยกเลิก"
+                                    }
+                                },
+                                "dismissible": true
+                            }).afterClosed().subscribe((res) => {
+    
+                                this._router.navigateByUrl('sala/list')
                             })
+                         
                         },
                         error: (err: any) => {
 

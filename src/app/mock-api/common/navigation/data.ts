@@ -153,7 +153,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                             return AuthService._menu7; // must be a boolean value
                         },
                     },
-                    {
+                    {   
                         id: 'position',
                         title: 'ตำแหน่ง',
                         type: 'collapsable',
@@ -507,42 +507,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
                             return AuthService._menu26; // must be a boolean value
                         },
                     },
-                    {
-                        id: 'new-gallery',
-                        title: 'เพิ่มแกลลอรี่ใหม่',
-                        type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        link: '/gallery/new-gallery',
-                        hidden: function () {
-                            return AuthService._menu27; // must be a boolean value
-                        },
-                    },
-                    {
-                        id: 'category-gallery',
-                        title: 'หมวดหมู่แกลลอรี่',
-                        type: 'collapsable',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        // link: '/user/list',
-                        hidden: function () {
-                            return AuthService._menu28; // must be a boolean value
-                        },
-                        children: [
-                            {
-                                id: 'list',
-                                title: 'รายชื่อหมวดหมู่',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/gallery/list-category-gallery',
-                            },
-                            {
-                                id: 'new-category-gallery',
-                                title: 'เพิ่มหมวดหมู่แกลลอรี่ใหม่',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/gallery/new-category-gallery',
-                            },
-                        ],
-                    },
+                   
+                  
                 ],
             },
         ],
@@ -697,14 +663,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ยืมอุปกรณ์',
                 type: 'collapsable',
                 icon: 'mat_outline:handyman',
-
-                // link: '/user/list',
                 children: [
                     {
                         id: 'list',
                         title: 'รายการยืมอุปกรณ์',
                         type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
                         link: '/deposit/list',
                         hidden: function () {
                             return AuthService._menu35; // must be a boolean value
@@ -712,9 +675,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'create-user',
-                        title: 'สร้างผู้ใช้งาน',
+                        title: 'สร้างผู้ใบยืมของ',
                         type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
                         link: '/deposit/new-deposit',
                         hidden: function () {
                             return AuthService._menu36; // must be a boolean value
@@ -826,19 +788,18 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/review/list',
                     },
-
-                    // {
-                    //     id: 'user',
-                    //     title: 'ผู้ใช้',
-                    //     type: 'basic',
-                    //     link: '/user/list',
-                    // },
-                    // {
-                    //     id: 'video',
-                    //     title: 'วีดีโอ',
-                    //     type: 'basic',
-                    //     link: '/video/list',
-                    // },
+                    {
+                        id: 'prayer',
+                        title: 'บทสวดมนต์',
+                        type: 'basic',
+                        link: '/prayer/list',
+                    },
+                    {
+                        id: 'word',
+                        title: 'คำคม',
+                        type: 'basic',
+                        link: '/word/list',
+                    },
                     {
                         id: 'youtube',
                         title: 'รายการวีดีโอยูทูบ',

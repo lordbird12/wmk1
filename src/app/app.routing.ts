@@ -329,7 +329,19 @@ export const appRoutes: Route[] = [
                     { path: '', loadChildren: () => import('app/modules/admin/website/single-banner/page.module').then(m => m.Module) },
                 ]
             },
+            {
+                path: 'prayer',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/prayer/page.module').then(m => m.Module) },
+                ]
+            },
 
+            {
+                path: 'word',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/word/page.module').then(m => m.Module) },
+                ]
+            },
 
             // {
             //     path: 'video',
