@@ -417,69 +417,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
         ],
     },
-    {
-        id: 'announcement',
-        title: 'จัดการข่าว',
-        // subtitle: 'Admin',
-        type: 'group',
-        icon: 'heroicons_outline:view-grid',
-        // hidden: function () {
-        //     return AuthService._marketingRole; // must be a boolean value
-        // },
-        children: [
-            {
-                id: 'announcement',
-                title: 'ข่าวสาร',
-                type: 'collapsable',
-                icon: 'heroicons_outline:newspaper',
-                // link: '/user/list',
-                children: [
-                    {
-                        id: 'list',
-                        title: 'รายการข่าว',
-                        type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        link: '/announcement/list',
-                        hidden: function () {
-                            return AuthService._menu23; // must be a boolean value
-                        },
-                    },
-                    {
-                        title: 'เพิ่มข่าวใหม่',
-                        type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        link: '/announcement/new',
-                        hidden: function () {
-                            return AuthService._menu24; // must be a boolean value
-                        },
-                    },
-                    {
-                        title: 'หมวดหมู่ข่าว',
-                        type: 'collapsable',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        // link: '/user/list',
-                        hidden: function () {
-                            return AuthService._menu25; // must be a boolean value
-                        },
-                        children: [
-                            {
-                                title: 'รายชื่อหมวดหมู่',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/blog-category/list',
-                            },
-                            {
-                                title: 'เพิ่มหมวดหมู่ใหม่',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/blog-category/new',
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
+   
     {
         id: 'gallery',
         title: 'จัดการแกลลอรี่',
@@ -493,23 +431,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
             {
                 id: 'gallery',
                 title: 'แกลลอรี่',
-                type: 'collapsable',
+                type: 'basic',
                 icon: 'mat_outline:picture_as_pdf',
-                // link: '/user/list',
-                children: [
-                    {
-                        id: 'list',
-                        title: 'รายการแกลลอรี่',
-                        type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        link: '/gallery/list',
-                        hidden: function () {
-                            return AuthService._menu26; // must be a boolean value
-                        },
-                    },
-                   
-                  
-                ],
+                link: '/gallery/list',
+                hidden: function () {
+                    return AuthService._menu26; // must be a boolean value
+                },
             },
         ],
     },
@@ -711,82 +638,66 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         link: '/banner/list',
                     },
                     {
-                        id: 'single-banner',
-                        title: 'แบนเนอร์เดี่ยว',
-                        type: 'basic',
-                        link: '/single-banner/list',
-                    },
-                    {
-                        id: 'category',
-                        title: 'หมวดหมู่คอร์ส',
-                        type: 'basic',
-                        link: '/category/list',
-                    },
-                    {
-                        id: 'gallery',
-                        title: 'แกลลอลี่',
-                        type: 'basic',
-                        link: '/gallery/list',
-                    },
-                    {
                         id: 'line',
                         title: 'Line',
                         type: 'basic',
                         link: '/line/list',
                     },
                     {
-                        id: 'menu',
-                        title: 'เมนู',
-                        type: 'basic',
-                        link: '/menu-customer/list',
-                    },
-                    {
-                        id: 'menus',
-                        title: 'เมนูหลัก',
-                        type: 'basic',
-                        link: '/menus/list',
-                    },
-                    {
-                        id: 'product',
-                        title: 'สินค้าทั้งหมด',
-                        type: 'basic',
-                        link: '/product/list',
-                    },
-                    {
-                        id: 'product-category',
-                        title: 'หมวดหมู่สินค้า',
-                        type: 'basic',
-                        link: '/product-category/list',
-                    },
-                    {
-                        id: 'product-healty',
-                        title: 'สินค้าเพื่อสุขภาพ',
-                        type: 'basic',
-                        link: '/product-healty/list',
-                    },
-                    {
-                        id: 'product-main',
-                        title: 'สินค้าหลัก',
-                        type: 'basic',
-                        link: '/product-main/list',
-                    },
-                    {
-                        id: 'product-weight',
-                        title: 'สินค้าเพื่อการลดน้ำหนัก',
-                        type: 'basic',
-                        link: '/product-weight/list',
-                    },
-                    {
-                        id: 'profile',
-                        title: 'โปรไฟล์',
-                        type: 'basic',
-                        link: '/profile/list',
-                    },
-                    {
                         id: 'review',
-                        title: 'อัลบั้มรูปภาพ',
+                        title: 'ความคิดเห็นจากผู้ใช้',
                         type: 'basic',
                         link: '/review/list',
+                    },
+                    {
+                        id: 'announcement',
+                        title: 'ข่าวสาร',
+                        type: 'collapsable',
+                        // link: '/user/list',
+                        children: [
+                            {
+                                id: 'list',
+                                title: 'รายการข่าว',
+                                type: 'basic',
+                                // icon: 'heroicons_outline:clipboard-check',
+                                link: '/announcement/list',
+                                hidden: function () {
+                                    return AuthService._menu23; // must be a boolean value
+                                },
+                            },
+                            {
+                                title: 'เพิ่มข่าวใหม่',
+                                type: 'basic',
+                                // icon: 'heroicons_outline:clipboard-check',
+                                link: '/announcement/new',
+                                hidden: function () {
+                                    return AuthService._menu24; // must be a boolean value
+                                },
+                            },
+                            {
+                                title: 'หมวดหมู่ข่าว',
+                                type: 'collapsable',
+                                // icon: 'heroicons_outline:clipboard-check',
+                                // link: '/user/list',
+                                hidden: function () {
+                                    return AuthService._menu25; // must be a boolean value
+                                },
+                                children: [
+                                    {
+                                        title: 'รายชื่อหมวดหมู่',
+                                        type: 'basic',
+                                        // icon: 'heroicons_outline:clipboard-check',
+                                        link: '/blog-category/list',
+                                    },
+                                    {
+                                        title: 'เพิ่มหมวดหมู่ใหม่',
+                                        type: 'basic',
+                                        // icon: 'heroicons_outline:clipboard-check',
+                                        link: '/blog-category/new',
+                                    },
+                                ],
+                            },
+                        ],
                     },
                     {
                         id: 'prayer',
@@ -805,12 +716,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         title: 'รายการวีดีโอยูทูบ',
                         type: 'basic',
                         link: '/youtube/list',
-                    },
-                    {
-                        id: 'youtube-best',
-                        title: 'รายการวีดีโอยูทูบสินค้าขายดี',
-                        type: 'basic',
-                        link: '/youtube-best/list',
                     },
                 ],
             },
