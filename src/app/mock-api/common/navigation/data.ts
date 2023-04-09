@@ -418,28 +418,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ],
     },
    
-    {
-        id: 'gallery',
-        title: 'จัดการแกลลอรี่',
-        // subtitle: 'Admin',
-        type: 'group',
-        icon: 'heroicons_outline:view-grid',
-        // hidden: function () {
-        //     return AuthService._marketingRole; // must be a boolean value
-        // },
-        children: [
-            {
-                id: 'gallery',
-                title: 'แกลลอรี่',
-                type: 'basic',
-                icon: 'mat_outline:picture_as_pdf',
-                link: '/gallery/list',
-                hidden: function () {
-                    return AuthService._menu26; // must be a boolean value
-                },
-            },
-        ],
-    },
+    // {
+    //     id: 'gallery',
+    //     title: 'จัดการแกลลอรี่',
+    //     type: 'group',
+    //     icon: 'heroicons_outline:view-grid',
+     
+    //     children: [
+        
+    //     ],
+    // },
     {
         id: 'sacred',
         title: 'จัดการวัตถุมงคล',
@@ -648,6 +636,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         title: 'ความคิดเห็นจากผู้ใช้',
                         type: 'basic',
                         link: '/review/list',
+                    },
+                    {
+                        id: 'gallery',
+                        title: 'แกลลอรี่',
+                        type: 'basic',
+                        // icon: 'mat_outline:picture_as_pdf',
+                        link: '/gallery/list',
+                        hidden: function () {
+                            return AuthService._menu26; // must be a boolean value
+                        },
                     },
                     {
                         id: 'announcement',
