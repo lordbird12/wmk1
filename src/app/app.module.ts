@@ -14,8 +14,6 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { MillionPipe } from './million.pipe';
 import { DecimalPipe } from '@angular/common';
-import { SaleOrderComponent } from './modules/admin/g-admin/sale-order/sale-order.component';
-// import { BranchComponent } from './modules/admin/g-admin/branch/branch.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -25,8 +23,6 @@ const routerConfig: ExtraOptions = {
 @NgModule({
     declarations: [
         AppComponent,
-        SaleOrderComponent,
-
     ],
     imports: [
         BrowserModule,

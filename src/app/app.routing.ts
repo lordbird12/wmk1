@@ -71,180 +71,162 @@ export const appRoutes: Route[] = [
             {
                 path: 'permission',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/permission/permission.module').then(m => m.PermissionModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/permission/permission.module').then(m => m.PermissionModule) },
                 ]
             },
             //user
             {
                 path: 'user',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/user/user.module').then(m => m.UserModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/user/user.module').then(m => m.UserModule) },
 
                 ]
             },
             {
                 path: 'menu',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/menu/menu.module').then(m => m.Module) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/menu/menu.module').then(m => m.Module) },
                 ]
             },
             {
                 path: 'branch',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/branch/branch.module').then(m => m.BranchModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/branch/branch.module').then(m => m.BranchModule) },
                 ]
             },
             {
                 path: 'department',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/department/department.module').then(m => m.DepartmentModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/department/department.module').then(m => m.DepartmentModule) },
                 ]
             },
 
             {
                 path: 'position',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/position/position.module').then(m => m.PositionModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/position/position.module').then(m => m.PositionModule) },
                 ]
             },
 
             {
                 path: 'customer',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer/customer.module').then(m => m.CustomerModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/customer/customer.module').then(m => m.CustomerModule) },
                 ]
             },
             {
                 path: 'item-type',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/item-type/item-type.module').then(m => m.ItemTypeModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/item-type/item-type.module').then(m => m.ItemTypeModule) },
                 ]
             },
             {
                 path: 'location',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/location/location.module').then(m => m.LocationModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/location/location.module').then(m => m.LocationModule) },
                 ]
             },
             {
                 path: 'warehouse',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/warehouse/warehouse.module').then(m => m.WarehouseModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/warehouse/warehouse.module').then(m => m.WarehouseModule) },
                 ]
             },
             {
                 path: 'vendor',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/vendor/vendor.module').then(m => m.VendorModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/vendor/vendor.module').then(m => m.VendorModule) },
                 ]
             },
 
             {
                 path: 'item',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/item/item.module').then(m => m.ItemModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/item/item.module').then(m => m.ItemModule) },
                 ]
             },
             {
                 path: 'deposit',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/stock/deposit/deposit.module').then(m => m.DepositModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/stock/deposit/deposit.module').then(m => m.DepositModule) },
 
                 ]
             },
             {
                 path: 'monk',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/monk/monk.module').then(m => m.MonkModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/monk/monk.module').then(m => m.MonkModule) },
 
                 ]
             },
             {
                 path: 'group-monk',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/group-monk/group-monk.module').then(m => m.GroupMonkModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/group-monk/group-monk.module').then(m => m.GroupMonkModule) },
 
                 ]
             },
             {
                 path: 'sala',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/sala/sala.module').then(m => m.SalaModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/sala/sala.module').then(m => m.SalaModule) },
 
                 ]
             },
             {
                 path: 'member',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/member/member.module').then(m => m.MemberModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/member/member.module').then(m => m.MemberModule) },
 
                 ]
             },
             {
-                path: 'news',
+                path: 'announcement',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/news/news.module').then(m => m.NewsModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/announcement/page.module').then(m => m.Module) },
 
                 ]
             },
             {
                 path: 'gallery',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/gallery/gallery.module').then(m => m.GalleryModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/gallery/page.module').then(m => m.Module) },
 
                 ]
             },
             {
                 path: 'sacred',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/sacred/sacred.module').then(m => m.SacredModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/sacred/sacred.module').then(m => m.SacredModule) },
 
                 ]
             },
             {
                 path: 'land',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/land/land.module').then(m => m.LandModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/land/land.module').then(m => m.LandModule) },
 
                 ]
             },
             {
                 path: 'event-land',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/event-land/event-land.module').then(m => m.EventLandModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/event-land/event-land.module').then(m => m.EventLandModule) },
 
                 ]
             },
             {
                 path: 'rent-land',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/rent-land/rent-land.module').then(m => m.RentLandModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/rent-land/rent-land.module').then(m => m.RentLandModule) },
 
-                ]
-            },
-            {
-                path: 'sale-order',
-                canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/sale-order/sale-order.module').then(m => m.SaleOrderModule) },
-                    // { path: 'create-user', loadChildren: () => import('app/modules/admin/g-admin/user/create-user/create-user.component').then(m => m.UserModule) },
-                    // { path: 'orders', loadChildren: () => import('app/modules/admin/marketing/orders/orders.module').then(m => m.OrdersModule) },
-                    // { path: 'expand-store-list', loadChildren: () => import('app/modules/admin/marketing/orders/expand-store-list/expand-store-list.module').then(m => m.ExpandStoreModule) },
-                    // {
-                    //     path: 'data', children: [
-                    //         { path: 'new-item-list-checking', loadChildren: () => import('app/modules/admin/marketing/new-item-list-checking/new-item-list-checking.module').then(m => m.NewItemListCheckingModule) },
-                    //         { path: 'assets-list', loadChildren: () => import('app/modules/admin/marketing/assets-list/assets-list.module').then(m => m.AssetsListModule) },
-                    //         { path: 'user', loadChildren: () => import('app/modules/admin/marketing/user/user.module').then(m => m.UserListModule) },
-                    //         { path: 'store', loadChildren: () => import('app/modules/admin/marketing/store/store.module').then(m => m.StoreModule) },
-                    //         { path: 'store-type', loadChildren: () => import('app/modules/admin/marketing/store-type/store-type.module').then(m => m.StoreTypeModule) },
-                    //     ]
-                    // },
                 ]
             },
             {
                 path: 'bank',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/bank/bank.module').then(m => m.BankModule) },
-                    // { path: 'create-user', loadChildren: () => import('app/modules/admin/g-admin/user/create-user/create-user.component').then(m => m.UserModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/bank/bank.module').then(m => m.BankModule) },
+                    // { path: 'create-user', loadChildren: () => import('app/modules/admin/admin/user/create-user/create-user.component').then(m => m.UserModule) },
                     // { path: 'orders', loadChildren: () => import('app/modules/admin/marketing/orders/orders.module').then(m => m.OrdersModule) },
                     // { path: 'expand-store-list', loadChildren: () => import('app/modules/admin/marketing/orders/expand-store-list/expand-store-list.module').then(m => m.ExpandStoreModule) },
                     // {
