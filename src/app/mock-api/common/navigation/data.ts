@@ -672,29 +672,26 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                     return AuthService._menu24; // must be a boolean value
                                 },
                             },
-                            {
-                                title: 'หมวดหมู่ข่าว',
-                                type: 'collapsable',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                // link: '/user/list',
-                                hidden: function () {
-                                    return AuthService._menu25; // must be a boolean value
-                                },
-                                children: [
-                                    {
-                                        title: 'รายชื่อหมวดหมู่',
-                                        type: 'basic',
-                                        // icon: 'heroicons_outline:clipboard-check',
-                                        link: '/blog-category/list',
-                                    },
-                                    {
-                                        title: 'เพิ่มหมวดหมู่ใหม่',
-                                        type: 'basic',
-                                        // icon: 'heroicons_outline:clipboard-check',
-                                        link: '/blog-category/new',
-                                    },
-                                ],
-                            },
+                            // {
+                            //     title: 'หมวดหมู่ข่าว',
+                            //     type: 'collapsable',
+                               
+                            //     hidden: function () {
+                            //         return AuthService._menu25; // must be a boolean value
+                            //     },
+                            //     children: [
+                            //         {
+                            //             title: 'รายชื่อหมวดหมู่',
+                            //             type: 'basic',
+                            //             link: '/blog-category/list',
+                            //         },
+                            //         {
+                            //             title: 'เพิ่มหมวดหมู่ใหม่',
+                            //             type: 'basic',
+                            //             link: '/blog-category/new',
+                            //         },
+                            //     ],
+                            // },
                         ],
                     },
                     {
