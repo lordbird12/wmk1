@@ -127,6 +127,7 @@ export class ListReserveComponent implements OnInit, AfterViewInit, OnDestroy {
             columns: [
                 { data: 'id' },
                 { data: 'name' },
+                { data: 'tel' },
                 { data: 'remark' },
                 { data: 'create_by' },
                 { data: 'created_at' },
@@ -188,6 +189,7 @@ export class ListReserveComponent implements OnInit, AfterViewInit, OnDestroy {
     edit(customerId: string): void {
         this._router.navigate(['/sala/edit-reserve-sala/' + customerId]);
     }
+
 
 
 }

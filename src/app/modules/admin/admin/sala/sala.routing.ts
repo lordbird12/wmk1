@@ -7,6 +7,7 @@ import { ReserveSalaComponent } from './reserve-sala/reserve-sala.component';
 import { NewSalaComponent } from './new-sala/new-sala.component';
 import { ListReserveComponent } from './list-reserve/list-reserve.component';
 import { EditReserveSalaComponent } from './edit-reserve-sala/edit-reserve-sala.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 export const salaRoute: Route[] = [
@@ -63,6 +64,14 @@ export const salaRoute: Route[] = [
             {
                 path: 'edit-reserve-sala/:id',
                 component: EditReserveSalaComponent
+                // resolve: {
+                //     products: PermissionProductsResolver,
+
+                // }
+            },
+            {
+                path: 'calendar/:id',
+                component: CalendarComponent
                 // resolve: {
                 //     products: PermissionProductsResolver,
 
