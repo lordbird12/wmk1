@@ -156,6 +156,9 @@ export class ListComponent implements OnInit, OnDestroy {
     edit(customerId: string): void {
         this._router.navigate(['/sacred/edit/' + customerId]);
     }
+    new(): void {
+        this._router.navigate(['/sacred/new-sacred']);
+    }
 
     openNewBrief(): void {
         this._router.navigateByUrl('marketing/brief-plan/brief/create');
