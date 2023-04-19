@@ -9,10 +9,10 @@
         <!-- Title -->
         <div class="text-4xl font-extrabold tracking-tight">รายการห้องเก็บอุปกรณ์</div>
         <!-- Actions -->
-        <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
             <!-- Add product button -->
-            <a href="location/new-location" class="ml-4" mat-flat-button [color]="'primary'">
+            <a routerLink="location/new-location" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">เพิ่มห้องเก็บอุปกรณ์ใหม่</span>
             </a>
@@ -45,8 +45,12 @@
                         <td>{{ item.floor }}</td>
                         <td>{{ item.remark }}</td>
                         <td>
-                            <div *ngIf="item.status === 'Yes'"> เปิดการใช้งาน</div>
-                            <div *ngIf="item.status === 'No'"> ปิดการใช้งาน</div>
+                            <div *ngIf="item.status === 'Yes'">
+                                <span class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดใช้งาน</span>
+                            </div>
+                            <div *ngIf="item.status === 'No'">
+                                <span class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
+                            </div>
                         </td>
                         <td>{{ item.create_by }}</td>
                         <td>{{ item.created_at }}</td>

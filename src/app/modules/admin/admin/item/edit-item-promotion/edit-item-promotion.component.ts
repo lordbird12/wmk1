@@ -247,7 +247,7 @@ export class EditItemPromotionComponent implements OnInit, AfterViewInit, OnDest
                 },
                 "cancel": {
                     "show": true,
-                    "label": "ยกเลิก"
+                    "label": "ย้อนกลับ"
                 }
             },
             "dismissible": true

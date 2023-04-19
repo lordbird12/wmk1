@@ -175,7 +175,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 title: 'สร้างตำแหน่ง',
                                 type: 'basic',
                                 // icon: 'heroicons_outline:clipboard-check',
-                                link: '/position/new-position',
+                                link: '/position/new',
                             },
                         ],
                     },
@@ -201,7 +201,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 title: 'สร้างแผนก',
                                 type: 'basic',
                                 // icon: 'heroicons_outline:clipboard-check',
-                                link: '/department/new-department',
+                                link: '/department/new',
                             },
                         ],
                     },
@@ -234,48 +234,25 @@ export const defaultNavigation: FuseNavigationItem[] = [
                             return AuthService._menu10; // must be a boolean value
                         },
                     },
+                    // {
+                    //     id: 'new-location',
+                    //     title: 'สร้างพระ',
+                    //     type: 'basic',
+                    //     // icon: 'heroicons_outline:clipboard-check',
+                    //     link: '/monk/new-monk',
+                    //     hidden: function () {
+                    //         return AuthService._menu11; // must be a boolean value
+                    //     },
+                    // },
                     {
-                        id: 'new-location',
-                        title: 'สร้างพระ',
+                        id: 'list-group-monk',
+                        title: 'รายการกลุ่มพระ',
                         type: 'basic',
                         // icon: 'heroicons_outline:clipboard-check',
-                        link: '/monk/new-monk',
+                        link: '/group-monk/list',
                         hidden: function () {
                             return AuthService._menu11; // must be a boolean value
                         },
-                    },
-                    {
-                        id: 'group-monk',
-                        title: 'จัดกลุ่มพระ',
-                        type: 'collapsable',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        // link: '/user/list',
-                        hidden: function () {
-                            return AuthService._menu12; // must be a boolean value
-                        },
-                        children: [
-                            {
-                                id: 'list',
-                                title: 'รายการจัดกลุ่มพระ',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/group-monk/list',
-                            },
-                            {
-                                id: 'new-group-monk',
-                                title: 'สร้างกลุ่มพระ',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/group-monk/new-group-monk',
-                            },
-                            {
-                                id: 'new-group-monk',
-                                title: 'เพิ่มพระเข้ากลุ่ม',
-                                type: 'basic',
-                                // icon: 'heroicons_outline:clipboard-check',
-                                link: '/group-monk/new-monk-group',
-                            },
-                        ],
                     },
                 ],
             },
@@ -297,16 +274,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         },
                     },
                     {
-                        id: 'new-sala',
-                        title: 'สร้างศาลา',
-                        type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        link: '/sala/new-sala',
-                        hidden: function () {
-                            return AuthService._menu14; // must be a boolean value
-                        },
-                    },
-                    {
                         id: 'list-reserve',
                         title: 'รายชื่อจองศาลา',
                         type: 'basic',
@@ -314,16 +281,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         link: '/sala/list-reserve',
                         hidden: function () {
                             return AuthService._menu15; // must be a boolean value
-                        },
-                    },
-                    {
-                        id: 'reserve-sala',
-                        title: 'จองศาลา',
-                        type: 'basic',
-                        // icon: 'heroicons_outline:clipboard-check',
-                        link: '/sala/reserve-sala',
-                        hidden: function () {
-                            return AuthService._menu16; // must be a boolean value
                         },
                     },
                 ],

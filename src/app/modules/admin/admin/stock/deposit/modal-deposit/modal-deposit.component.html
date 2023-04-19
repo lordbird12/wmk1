@@ -11,11 +11,8 @@
                 <div class="overflow-hidden">
                     <form [formGroup]="formData">
                         <div class="mb-6">
-                            <label for="base-input"
-                                class="block mb-2 text-lg font-extrabold text-gray-900 dark:text-gray-300">ค้นหาสินค้า</label>
-                            <input type="text" id="base-input" (keyup)="onFilter($event)" formControlName="filter"
-                                placeholder="ค้นหาสินค้า"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gold-500 focus:border-gold-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gold-500 dark:focus:border-gold-500">
+                            <label for="base-input" class="block mb-2 text-lg font-extrabold text-gray-900 dark:text-gray-300">ค้นหาสินค้า</label>
+                            <input type="text" id="base-input" (keyup)="onFilter($event)" formControlName="filter" placeholder="ค้นหาสินค้า" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gold-500 focus:border-gold-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gold-500 dark:focus:border-gold-500">
                         </div>
                     </form>
                 </div>
@@ -126,7 +123,7 @@
 
                     <button class="px-6 ml-3 mat-sec" mat-flat-button (click)="onClose()">
                         <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
-                        ยกเลิก
+                        ย้อนกลับ
                     </button>
                     <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="onSubmit()">
                         <mat-icon svgIcon="heroicons_solid:check"></mat-icon>

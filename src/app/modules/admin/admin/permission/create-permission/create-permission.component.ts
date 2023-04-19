@@ -128,7 +128,7 @@ export class CreatePermissionComponent implements OnInit, AfterViewInit, OnDestr
         },
         "cancel": {
           "show": true,
-          "label": "ยกเลิก"
+          "label": "ย้อนกลับ"
         }
       },
       "dismissible": true

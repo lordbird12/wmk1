@@ -146,7 +146,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
                 },
                 cancel: {
                     show: true,
-                    label: 'ยกเลิก',
+                    label: 'ย้อนกลับ',
                 },
             },
             dismissible: true,
@@ -185,7 +185,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 cancel: {
                                     show: false,
-                                    label: 'ยกเลิก',
+                                    label: 'ย้อนกลับ',
                                 },
                             },
                             dismissible: true,

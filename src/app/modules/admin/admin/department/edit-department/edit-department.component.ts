@@ -111,7 +111,7 @@ export class EditDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
     }
 
 
-    UpdateBranch(): void {
+    update(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
@@ -135,7 +135,7 @@ export class EditDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
                 },
                 "cancel": {
                     "show": true,
-                    "label": "ยกเลิก"
+                    "label": "ย้อนกลับ"
                 }
             },
             "dismissible": true
@@ -171,7 +171,7 @@ export class EditDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
                                 },
                                 "cancel": {
                                     "show": false,
-                                    "label": "ยกเลิก",
+                                    "label": "ย้อนกลับ",
 
                                 }
                             },

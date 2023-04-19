@@ -27,7 +27,7 @@ export const departmentRoute: Route[] = [
                 // }
             },
             {
-                path: 'new-department',
+                path: 'new',
                 component: NewDepartmentComponent,
                 // resolve: {
                 //     products: PermissionProductsResolver,

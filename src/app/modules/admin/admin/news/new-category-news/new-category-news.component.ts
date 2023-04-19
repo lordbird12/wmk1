@@ -131,7 +131,7 @@ export class NewCategoryNewsComponent implements OnInit, AfterViewInit, OnDestro
                 },
                 "cancel": {
                     "show": true,
-                    "label": "ยกเลิก"
+                    "label": "ย้อนกลับ"
                 }
             },
             "dismissible": true
@@ -165,7 +165,7 @@ export class NewCategoryNewsComponent implements OnInit, AfterViewInit, OnDestro
                                     },
                                     "cancel": {
                                         "show": false,
-                                        "label": "ยกเลิก",
+                                        "label": "ย้อนกลับ",
 
                                     }
                                 },

@@ -412,6 +412,14 @@ export class MonkService {
     );
   }
 
+  getGroupForMonk(): Observable<any> {
+    return this._httpClient.get<any>(environment.API_URL + 'api/get_group').pipe(
+      tap((meterial) => {
+        this._materials.next(meterial);
+      })
+    );
+  }
+
   getProductsOsm(page: number = 0,
     size: number = 10,
     sort: string = 'updatedAt',

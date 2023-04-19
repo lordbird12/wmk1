@@ -1,9 +1,32 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { debounceTime, lastValueFrom, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+    debounceTime,
+    lastValueFrom,
+    map,
+    merge,
+    Observable,
+    Subject,
+    switchMap,
+    takeUntil,
+} from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,15 +47,14 @@ import { DepartmentService } from '../../department/department.service';
     selector: 'new-monk',
     templateUrl: './new-monk.component.html',
     styleUrls: ['./new-monk.component.scss'],
-    animations: fuseAnimations
+    animations: fuseAnimations,
 })
-
 export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
-    formData: FormGroup
-    uploadPic: FormGroup
+    formData: FormGroup;
+    uploadPic: FormGroup;
     flashErrorMessage: string;
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
@@ -53,8 +75,9 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
     files: File[] = [];
     supplierId: string | null;
     pagination: CustomerPagination;
-    departmentData: any = []
-    positionData: any = []
+    departmentData: any = [];
+    positionData: any = [];
+    groupmonkData: any = [];
     /**
      * Constructor
      */
@@ -72,10 +95,8 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
         private _ServiceDepartment: DepartmentService,
         private _ServiceItemtemType: ItemTypeService,
         private _ServiceLocation: LocationService,
-        private _ServiceVendor: VendorService,
-
+        private _ServiceVendor: VendorService
     ) {
-
         this.formData = this._formBuilder.group({
             department_id: '',
             position_id: '',
@@ -85,10 +106,9 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
             line_token: '',
             skill: '',
             monk_age: '',
-            image: ''
-        })
-
-
+            image: '',
+            group_id: '',
+        });
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -99,12 +119,18 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     async ngOnInit(): Promise<void> {
-
-        const position = await lastValueFrom(this._ServicePosition.getPosition())
+        const position = await lastValueFrom(
+            this._ServicePosition.getPosition()
+        );
         this.departmentData = position.data;
 
-        const department = await lastValueFrom(this._ServiceDepartment.getDepartment())
+        const department = await lastValueFrom(
+            this._ServiceDepartment.getDepartment()
+        );
         this.positionData = department.data;
+
+        const group = await lastValueFrom(this._Service.getGroupForMonk());
+        this.groupmonkData = group.data;
 
         this.formData = this._formBuilder.group({
             department_id: '',
@@ -115,26 +141,22 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
             line_token: '',
             skill: '',
             monk_age: '',
-            image: ''
-        })
+            image: '',
+            group_id: '',
+        });
     }
 
     /**
      * After view init
      */
-    ngAfterViewInit(): void {
-
-    }
-
+    ngAfterViewInit(): void {}
 
     /**
      * On destroy
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
-
     }
-
 
     CreateItem(): void {
         this.flashMessage = null;
@@ -145,85 +167,74 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
         // }
         // Open the confirmation dialog
         const confirmation = this._fuseConfirmationService.open({
-            "title": "เพิ่มพระใหม่",
-            "message": "คุณต้องการเพิ่มพระใหม่ใช่หรือไม่ ",
-            "icon": {
-                "show": false,
-                "name": "heroicons_outline:exclamation",
-                "color": "warning"
+            title: 'เพิ่มพระใหม่',
+            message: 'คุณต้องการเพิ่มพระใหม่ใช่หรือไม่ ',
+            icon: {
+                show: false,
+                name: 'heroicons_outline:exclamation',
+                color: 'warning',
             },
-            "actions": {
-                "confirm": {
-                    "show": true,
-                    "label": "ยืนยัน",
-                    "color": "primary"
+            actions: {
+                confirm: {
+                    show: true,
+                    label: 'ยืนยัน',
+                    color: 'primary',
                 },
-                "cancel": {
-                    "show": true,
-                    "label": "ยกเลิก"
-                }
+                cancel: {
+                    show: true,
+                    label: 'ย้อนกลับ',
+                },
             },
-            "dismissible": true
+            dismissible: true,
         });
 
         // Subscribe to the confirmation dialog closed action
         confirmation.afterClosed().subscribe((result) => {
-
             // If the confirm button pressed...
             if (result === 'confirmed') {
-                const formValue = this.formData.value
+                const formValue = this.formData.value;
                 // console.log('formData', formValue)
-                console.log('this.files[0]', this.files[0])
+                console.log('this.files[0]', this.files[0]);
 
                 this.formData.patchValue({
                     image: this.files[0],
                 });
-                console.log('formValue', formValue)
+                console.log('formValue', formValue);
                 const formData = new FormData();
-                Object.entries(formValue).forEach(
-                    ([key, value]: any[]) => {
-                        formData.append(key, value);
-                    }
-                );
+                Object.entries(formValue).forEach(([key, value]: any[]) => {
+                    formData.append(key, value);
+                });
                 console.log('formData', formData);
 
-
-                this._Service.NewItem(formData).subscribe(
-                    {
-                        next: (resp: any) => {
-                            this._router.navigateByUrl('monk/list').then(() => { })
-                        },
-                        error: (err: any) => {
-
-                            this._fuseConfirmationService.open({
-                                "title": "กรุณาระบุข้อมูล",
-                                "message": err.error.message,
-                                "icon": {
-                                    "show": true,
-                                    "name": "heroicons_outline:exclamation",
-                                    "color": "warning"
+                this._Service.NewItem(formData).subscribe({
+                    next: (resp: any) => {
+                        this._router.navigateByUrl('monk/list').then(() => {});
+                    },
+                    error: (err: any) => {
+                        this._fuseConfirmationService.open({
+                            title: 'กรุณาระบุข้อมูล',
+                            message: err.error.message,
+                            icon: {
+                                show: true,
+                                name: 'heroicons_outline:exclamation',
+                                color: 'warning',
+                            },
+                            actions: {
+                                confirm: {
+                                    show: false,
+                                    label: 'ยืนยัน',
+                                    color: 'primary',
                                 },
-                                "actions": {
-                                    "confirm": {
-                                        "show": false,
-                                        "label": "ยืนยัน",
-                                        "color": "primary"
-                                    },
-                                    "cancel": {
-                                        "show": false,
-                                        "label": "ยกเลิก",
-
-                                    }
+                                cancel: {
+                                    show: false,
+                                    label: 'ย้อนกลับ',
                                 },
-                                "dismissible": true
-                            });
-                            console.log(err.error.message)
-                        }
-
-                    }
-                )
-
-
+                            },
+                            dismissible: true,
+                        });
+                        console.log(err.error.message);
+                    },
+                });
             }
         });
     }
@@ -235,12 +246,12 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // Trigger Image Preview
 
-        this._changeDetectorRef.detectChanges()
+        this._changeDetectorRef.detectChanges();
 
         this.formData.patchValue({
             image: this.files[0],
         });
-        console.log(this.formData.value)
+        console.log(this.formData.value);
     }
 
     onRemove(event) {
@@ -249,8 +260,6 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
         this.formData.patchValue({
             image: '',
         });
-        console.log(this.formData.value)
+        console.log(this.formData.value);
     }
-
-
 }

@@ -220,7 +220,7 @@ export class ViewTransactionComponent implements OnInit, AfterViewInit, OnDestro
                 showCancelButton: true,
                 confirmButtonColor: '#c98a01',
                 // cancelButtonColor: '#f4fbd2',
-                cancelButtonText: 'ยกเลิก',
+                cancelButtonText: 'ย้อนกลับ',
                 confirmButtonText: 'บันทึก'
             })
 
@@ -255,7 +255,7 @@ export class ViewTransactionComponent implements OnInit, AfterViewInit, OnDestro
                                 },
                                 "cancel": {
                                     "show": false,
-                                    "label": "ยกเลิก",
+                                    "label": "ย้อนกลับ",
 
                                 }
                             },
@@ -290,7 +290,7 @@ export class ViewTransactionComponent implements OnInit, AfterViewInit, OnDestro
                     },
                     "cancel": {
                         "show": true,
-                        "label": "ยกเลิก"
+                        "label": "ย้อนกลับ"
                     }
                 },
                 "dismissible": true
@@ -328,7 +328,7 @@ export class ViewTransactionComponent implements OnInit, AfterViewInit, OnDestro
                                     },
                                     "cancel": {
                                         "show": false,
-                                        "label": "ยกเลิก",
+                                        "label": "ย้อนกลับ",
 
                                     }
                                 },

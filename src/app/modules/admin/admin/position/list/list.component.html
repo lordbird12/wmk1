@@ -1,8 +1,7 @@
 <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
 
     <!-- Header -->
-    <div
-        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
         <!-- Loader -->
         <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
@@ -13,7 +12,7 @@
         <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
             <!-- Add product button -->
-            <a href="department/new-department" class="ml-4" mat-flat-button [color]="'primary'">
+            <a routerLink="position/new" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">เพิ่มตำแหน่ง</span>
             </a>
@@ -70,8 +69,12 @@
                         <td>{{ pages.begin + (i + 1) }}</td>
                         <td>{{ item.name }}</td>
                         <td>
-                            <div *ngIf="item.status === '1'"> เปิดการใช้งาน</div>
-                            <div *ngIf="item.status === '0'"> ปิดการใช้งาน</div>
+                            <div *ngIf="item.status === '1'">
+                                <span class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดใช้งาน</span>
+                            </div>
+                            <div *ngIf="item.status === '0'">
+                                <span class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
+                            </div>
                         </td>
                         <td>{{ item.create_by }}</td>
                         <td>{{ item.created_at }}</td>

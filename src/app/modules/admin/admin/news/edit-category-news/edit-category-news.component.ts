@@ -205,7 +205,7 @@ export class EditCategoryNewsComponent implements OnInit, AfterViewInit, OnDestr
                 },
                 "cancel": {
                     "show": true,
-                    "label": "ยกเลิก"
+                    "label": "ย้อนกลับ"
                 }
             },
             "dismissible": true
@@ -237,7 +237,7 @@ export class EditCategoryNewsComponent implements OnInit, AfterViewInit, OnDestr
                                     },
                                     "cancel": {
                                         "show": false,
-                                        "label": "ยกเลิก"
+                                        "label": "ย้อนกลับ"
                                     }
                                 },
                                 "dismissible": true
@@ -262,7 +262,7 @@ export class EditCategoryNewsComponent implements OnInit, AfterViewInit, OnDestr
                                     },
                                     "cancel": {
                                         "show": false,
-                                        "label": "ยกเลิก",
+                                        "label": "ย้อนกลับ",
 
                                     }
                                 },

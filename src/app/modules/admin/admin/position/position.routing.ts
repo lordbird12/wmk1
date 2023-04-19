@@ -27,7 +27,7 @@ export const positionRoute: Route[] = [
                 // }
             },
             {
-                path: 'new-position',
+                path: 'new',
                 component: NewPositionComponent,
                 // resolve: {
                 //     products: PermissionProductsResolver,

@@ -153,7 +153,7 @@ export class EditPermissionComponent implements OnInit, AfterViewInit, OnDestroy
         },
         "cancel": {
           "show": true,
-          "label": "ยกเลิก"
+          "label": "ย้อนกลับ"
         }
       },
       "dismissible": true

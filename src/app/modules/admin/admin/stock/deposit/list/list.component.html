@@ -1,8 +1,7 @@
 <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
 
     <!-- Header -->
-    <div
-        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
         <!-- Loader -->
         <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
@@ -10,10 +9,10 @@
         <!-- Title -->
         <div class="text-4xl font-extrabold tracking-tight">รายการยืมอุปกรณ์</div>
         <!-- Actions -->
-        <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
             <!-- Add product button -->
-            <a href="deposit/new-deposit" class="ml-4" mat-flat-button [color]="'primary'">
+            <a routerLink="../../deposit/new-deposit" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">เพิ่มใบยืมอุปกรณ์</span>
             </a>
@@ -43,7 +42,12 @@
                         <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
                         <td style="width: 20%;">{{ item.order_no }}</td>
                         <td>
-                            {{item.status}}
+                            <div *ngIf="item.status === 'Received'">
+                                <span class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">คืนแล้ว</span>
+                            </div>
+                            <div *ngIf="item.status === 'Request'">
+                                <span class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">เบิกขอ</span>
+                            </div>
                         </td>
                         <td>{{ item.create_by }}</td>
                         <td>{{ item.created_at }}</td>

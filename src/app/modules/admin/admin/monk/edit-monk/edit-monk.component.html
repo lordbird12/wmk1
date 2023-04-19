@@ -1,8 +1,7 @@
 <div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
 
     <!-- Header -->
-    <div
-        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
         <div class="flex-1 min-w-0">
             <!-- Title -->
             <div class="mt-2">
@@ -25,15 +24,6 @@
                                 <input (change)='onChange($event)' type="file" id="file" style="cursor: pointer;">
                                 <img class="img" [src]="url">
                             </label>
-                        </div>
-                    </div>
-                    &nbsp;
-                    <div class="flex justify-center items-center w-full">
-                        <div class="flex flex-col w-full lg:w-4/4">
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>Line Token</mat-label>
-                                <input matInput [formControlName]="'line_token'">
-                            </mat-form-field>
                         </div>
                     </div>
                 </div>
@@ -76,16 +66,27 @@
                                     <input matInput [formControlName]="'monk_age'">
                                 </mat-form-field>
                             </div>
-                            <!-- <div class="flex p-5">
-                                <mat-form-field class="w-4/12 pr-2">
-                                    <mat-label>Line Token</mat-label>
-                                    <input matInput [formControlName]="'line_token'">
-                                </mat-form-field>
-                            </div> -->
+
                             <div class="flex p-5 w-full">
                                 <mat-form-field class="w-full">
                                     <mat-label>รายละเอียด</mat-label>
                                     <textarea matInput rows="4" [formControlName]="'skill'"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="flex p-5 w-full">
+                                <mat-form-field class="w-full pr-2">
+                                    <mat-label>Line Token</mat-label>
+                                    <input matInput [formControlName]="'line_token'">
+                                </mat-form-field>
+                            </div>
+                            <div class="flex p-5 w-full">
+                                <mat-form-field class="w-full pr-2">
+                                    <mat-label>เลือกกลุ่ม</mat-label>
+                                    <mat-select [formControlName]="'group_id'">
+                                        <mat-option *ngFor="let role of groupmonkData" [value]="role.id">
+                                            {{role.name}}
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -96,9 +97,9 @@
         </form>
         <div class="flex items-center justify-end w-full border-t px-8 py-4">
             <div class="flex items-center justify-end">
-                <a class="ml-4" mat-flat-button href="item/list">
+                <a class="ml-4" mat-flat-button routerLink="../../item/list">
                     <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
-                    ยกเลิก
+                    ย้อนกลับ
                 </a>
                 <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="updateItem()">
                     <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
