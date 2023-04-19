@@ -149,6 +149,9 @@ export class DepartmentListComponent implements OnInit, AfterViewInit, OnDestroy
         this._router.navigate(['department/edit/' + id]);
     }
 
+    new(): void {
+        this._router.navigate(['/department/new']);
+    }
 
 
 

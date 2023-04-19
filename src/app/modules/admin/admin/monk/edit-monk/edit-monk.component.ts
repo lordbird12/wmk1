@@ -208,12 +208,12 @@ export class EditMonkComponent implements OnInit, AfterViewInit, OnDestroy {
         // console.log
     }
 
-    discard(): void {}
+    discard(): void { }
 
     /**
      * After view init
      */
-    ngAfterViewInit(): void {}
+    ngAfterViewInit(): void { }
 
     /**
      * On destroy
@@ -312,4 +312,9 @@ export class EditMonkComponent implements OnInit, AfterViewInit, OnDestroy {
             this._changeDetectorRef.markForCheck();
         }, 3000);
     }
+
+    goBack(): void {
+        this._router.navigate(['monk/list']);
+    }
+
 }

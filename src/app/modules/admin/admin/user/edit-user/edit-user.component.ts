@@ -355,4 +355,8 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
         // console.log
     }
 
+    goBack(): void {
+        this._router.navigate(['user/list']);
+    }
+
 }

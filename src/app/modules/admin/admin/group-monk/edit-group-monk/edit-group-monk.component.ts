@@ -208,4 +208,9 @@ export class EditGroupMonkComponent implements OnInit, AfterViewInit, OnDestroy 
         });
 
     }
+
+    goBack(): void {
+        this._router.navigate(['group-monk/list']);
+    }
+
 }

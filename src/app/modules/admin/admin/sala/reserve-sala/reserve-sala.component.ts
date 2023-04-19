@@ -252,4 +252,8 @@ export class ReserveSalaComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.monkGroupData)
         this._changeDetectorRef.markForCheck();
     }
+
+    goBack(): void {
+        this._router.navigate(['sala/list-reserve']);
+    }
 }

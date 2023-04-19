@@ -62,8 +62,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     supplierId: string | null;
     pagination: CustomerPagination;
     departmentData: any = []
-    rentTypeData: any = [ 'Day', 'Week', 'Month', '3 Month', '6 Month', 'Year', '3 Year', '6 Year']
-    categoryData: any = ['Event', 'Land' ]
+    rentTypeData: any = ['Day', 'Week', 'Month', '3 Month', '6 Month', 'Year', '3 Year', '6 Year']
+    categoryData: any = ['Event', 'Land']
     positionData: any = []
     /**
      * Constructor
@@ -197,7 +197,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                     let datestop = formValue.edate._i.year + '-' + formValue.edate._i.month + '-' + formValue.edate._i.date;
                     formValue.edate = datestop
                 }
-           
+
                 this._Service.updateItem(formValue, this.itemId).subscribe(
                     {
                         next: (resp: any) => {
@@ -273,7 +273,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             this._changeDetectorRef.markForCheck();
         }, 3000);
     }
-
+    goBack(): void {
+        this._router.navigate(['rent-land/list']);
+    }
 
 
 }

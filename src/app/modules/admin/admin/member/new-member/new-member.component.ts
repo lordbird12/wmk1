@@ -182,4 +182,8 @@ export class NewMemberComponent implements OnInit, AfterViewInit, OnDestroy {
     showFlashMessage(arg0: string) {
         throw new Error('Method not implemented.');
     }
+
+    goBack(): void {
+        this._router.navigate(['member/list']);
+    }
 }

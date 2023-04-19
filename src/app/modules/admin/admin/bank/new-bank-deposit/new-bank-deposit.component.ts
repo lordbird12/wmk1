@@ -47,8 +47,7 @@ import moment from 'moment';
     animations: fuseAnimations,
 })
 export class NewBankDepositComponent
-    implements OnInit, AfterViewInit, OnDestroy
-{
+    implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
@@ -136,7 +135,7 @@ export class NewBankDepositComponent
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService
-    ) {}
+    ) { }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
@@ -165,12 +164,12 @@ export class NewBankDepositComponent
         });
     }
 
-    discard(): void {}
+    discard(): void { }
 
     /**
      * After view init
      */
-    ngAfterViewInit(): void {}
+    ngAfterViewInit(): void { }
 
     /**
      * On destroy
@@ -233,7 +232,7 @@ export class NewBankDepositComponent
                     next: (resp: any) => {
                         this._router
                             .navigateByUrl('bank/list-deposit')
-                            .then(() => {});
+                            .then(() => { });
                     },
                     error: (err: any) => {
                         this._fuseConfirmationService.open({
@@ -364,5 +363,9 @@ export class NewBankDepositComponent
         this.formData.patchValue({
             images: [],
         });
+    }
+
+    goBack(): void {
+        this._router.navigate(['bank/list-deposit']);
     }
 }

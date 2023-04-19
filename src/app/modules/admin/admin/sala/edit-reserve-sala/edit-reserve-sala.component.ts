@@ -234,4 +234,8 @@ export class EditReserveSalaComponent implements OnInit, AfterViewInit, OnDestro
         console.log(event)
 
     }
+
+    goBack(): void {
+        this._router.navigate(['sala/list-reserve']);
+    }
 }

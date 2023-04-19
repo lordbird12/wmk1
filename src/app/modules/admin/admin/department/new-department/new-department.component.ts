@@ -180,11 +180,11 @@ export class NewDepartmentComponent implements OnInit, AfterViewInit, OnDestroy 
             // If the confirm button pressed...
             if (result === 'confirmed') {
                 this._Service.createDepartment(this.formData.value).subscribe({
-                    next: (resp: any)=> {
+                    next: (resp: any) => {
                         this.showFlashMessage('success');
-                            this._router.navigateByUrl('department/list').then(() => {
-                               
-                            });
+                        this._router.navigateByUrl('department/list').then(() => {
+
+                        });
                     },
                     error: (err: any) => {
 
@@ -237,4 +237,7 @@ export class NewDepartmentComponent implements OnInit, AfterViewInit, OnDestroy 
         }, 3000);
     }
 
+    goBack(): void {
+        this._router.navigate(['department/list']);
+    }
 }

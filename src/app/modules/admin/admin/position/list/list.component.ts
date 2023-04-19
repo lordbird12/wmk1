@@ -200,6 +200,11 @@ export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
         this._router.navigate(['position/edit/' + productId]);
     }
 
+    new(): void {
+        this._router.navigate(['/position/new']);
+    }
+
+
     openNewBrief(): void {
         this._router.navigateByUrl('marketing/brief-plan/brief/create');
     }

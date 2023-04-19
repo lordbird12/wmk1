@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/core/auth/auth.service';
 import { sortBy, startCase } from 'lodash-es';
-import { AssetType, PermissionPagination , DataPermission} from '../permission.types';
+import { AssetType, PermissionPagination, DataPermission } from '../permission.types';
 import { PermissionService } from '../permission.service';
 import { MatTableDataSource } from '@angular/material/table';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
@@ -44,12 +44,12 @@ export class PermissionListComponent implements OnInit, AfterViewInit, OnDestroy
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
     roleData = [
-        { id: 1, name: 'Admin' , status: 1, create_by: 'admin',created_at:'10/09/2022 08:30:21' },
-        { id: 2, name: 'Telesale' ,status: 1, create_by: 'admin',created_at:'10/09/2022 08:30:21' },
-        { id: 3, name: 'Stock' ,status: 1, create_by: 'admin',created_at:'10/09/2022 08:30:21' },
-        { id: 4, name: 'Packing' ,status: 1, create_by: 'admin',created_at:'10/09/2022 08:30:21' },
-        { id: 5, name: 'Manager' ,status: 1, create_by: 'admin',created_at:'10/09/2022 08:30:21' },
-        { id: 6, name: 'ทีมยิงad' ,status: 1, create_by: 'admin',created_at:'10/09/2022 08:30:21' },
+        { id: 1, name: 'Admin', status: 1, create_by: 'admin', created_at: '10/09/2022 08:30:21' },
+        { id: 2, name: 'Telesale', status: 1, create_by: 'admin', created_at: '10/09/2022 08:30:21' },
+        { id: 3, name: 'Stock', status: 1, create_by: 'admin', created_at: '10/09/2022 08:30:21' },
+        { id: 4, name: 'Packing', status: 1, create_by: 'admin', created_at: '10/09/2022 08:30:21' },
+        { id: 5, name: 'Manager', status: 1, create_by: 'admin', created_at: '10/09/2022 08:30:21' },
+        { id: 6, name: 'ทีมยิงad', status: 1, create_by: 'admin', created_at: '10/09/2022 08:30:21' },
 
     ]
     me: any | null;
@@ -85,13 +85,13 @@ export class PermissionListComponent implements OnInit, AfterViewInit, OnDestroy
      */
     ngOnInit(): void {
         // this._Service.getCustomer().subscribe((resp: any) => {
-            this.dataRow = this.roleData
-            this.dataSource = new MatTableDataSource(this.dataRow)
-            this.dataSource.paginator = this._paginator;
-            this.dataSource.sort = this._sort;
-            this._changeDetectorRef.markForCheck();
+        this.dataRow = this.roleData
+        this.dataSource = new MatTableDataSource(this.dataRow)
+        this.dataSource.paginator = this._paginator;
+        this.dataSource.sort = this._sort;
+        this._changeDetectorRef.markForCheck();
         // })
-       
+
     }
 
     /**
@@ -232,4 +232,9 @@ export class PermissionListComponent implements OnInit, AfterViewInit, OnDestroy
     // openImportOsm(): void {
     //     this._matDialog.open(ImportOSMComponent)
     // }
+
+    new(): void {
+        this._router.navigate(['/permission/new']);
+    }
+
 }

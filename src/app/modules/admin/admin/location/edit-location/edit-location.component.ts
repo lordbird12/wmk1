@@ -290,7 +290,7 @@ export class EditLocationComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 "dismissible": true
                             }).afterClosed().subscribe((res) => {
-    
+
                                 this._router.navigateByUrl('location/list')
                             })
                         },
@@ -364,7 +364,9 @@ export class EditLocationComponent implements OnInit, AfterViewInit, OnDestroy {
             this._changeDetectorRef.markForCheck();
         }, 3000);
     }
-
+    goBack(): void {
+        this._router.navigate(['location/list']);
+    }
 
 
 }

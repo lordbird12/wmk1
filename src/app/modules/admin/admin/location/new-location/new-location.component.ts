@@ -284,6 +284,9 @@ export class NewLocationComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 3000);
     }
 
+    goBack(): void {
+        this._router.navigate(['location/list']);
+    }
 
 
 }

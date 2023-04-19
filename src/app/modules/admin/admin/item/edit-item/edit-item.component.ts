@@ -271,10 +271,10 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 "dismissible": true
                             }).afterClosed().subscribe((res) => {
-    
+
                                 this._router.navigateByUrl('item/list')
                             })
-                         
+
                         },
                         error: (err: any) => {
 
@@ -326,6 +326,8 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 3000);
     }
 
-
+    goBack(): void {
+        this._router.navigate(['item/list']);
+    }
 
 }

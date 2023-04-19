@@ -213,7 +213,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * After view init
      */
-    ngAfterViewInit(): void {}
+    ngAfterViewInit(): void { }
 
     /**
      * On destroy
@@ -265,7 +265,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                             this.showFlashMessage('success');
                             this._router
                                 .navigateByUrl('bank/list')
-                                .then(() => {});
+                                .then(() => { });
                         },
                         error: (err: any) => {
                             this.formData.enable();
@@ -416,4 +416,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
         return this.menu().at(index).get('menus') as FormArray;
     }
+
+    goBack(): void {
+        this._router.navigate(['']);
+    }
+
 }
