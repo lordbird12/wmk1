@@ -186,7 +186,29 @@ export class ReserveSalaComponent implements OnInit, AfterViewInit, OnDestroy {
 
                 this._Service.addReserve(formValue).subscribe({
                     next: (resp: any) => {
-                        this._router.navigateByUrl('sala/list-reserve').then(() => {
+                        this._fuseConfirmationService.open({
+                            "title": "สร้างการจองศาลา",
+                            "message": "บันทึกเรียบร้อย",
+                            "icon": {
+                                "show": true,
+                                "name": "heroicons_outline:check-circle",
+                                "color": "success"
+                            },
+                            "actions": {
+                                "confirm": {
+                                    "show": false,
+                                    "label": "ตกลง",
+                                    "color": "primary"
+                                },
+                                "cancel": {
+                                    "show": false,
+                                    "label": "ยกเลิก"
+                                }
+                            },
+                            "dismissible": true
+                        }).afterClosed().subscribe((res) => {
+
+                            this._router.navigateByUrl('sala/list-reserve')
                         })
 
                     },

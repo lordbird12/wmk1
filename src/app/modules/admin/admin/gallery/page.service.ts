@@ -201,7 +201,7 @@ export class Service {
     create(data: any): Observable<any> {
         return this._httpClient
             .post(
-                environment.API_URL + '/api/gallery',
+                environment.API_URL + 'api/gallery',
                 data,
                 this.httpOptionsFormdata
             )
@@ -215,7 +215,7 @@ export class Service {
 
     delete(id: any): Observable<any> {
         return this._httpClient.delete<any>(
-            environment.API_URL + '/api/gallery/' + id,
+            environment.API_URL + 'api/gallery/' + id,
             { headers: this.httpOptionsFormdata.headers }
         );
     }
@@ -223,7 +223,7 @@ export class Service {
     // get position //
     getList(): Observable<any> {
         return this._httpClient
-            .get<any>(environment.API_URL + '/api/get_gallery')
+            .get<any>(environment.API_URL + 'api/get_gallery')
             .pipe(
                 tap((meterial) => {
                     this._materials.next(meterial);

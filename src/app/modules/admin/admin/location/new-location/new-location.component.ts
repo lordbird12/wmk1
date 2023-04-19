@@ -162,9 +162,31 @@ export class NewLocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
                 this._Service.createLocation(formData).subscribe({
                     next: (res: any) => {
-                        this._router.navigateByUrl('location/list').then(() => {
-                            // window.location.reload();
-                        });
+                        this.showFlashMessage('success');
+                        this._fuseConfirmationService.open({
+                            "title": "แก้ไขข้อมูลห้องเก็บอุปกรณ์",
+                            "message": "บันทึกเรียบร้อย",
+                            "icon": {
+                                "show": true,
+                                "name": "heroicons_outline:check-circle",
+                                "color": "success"
+                            },
+                            "actions": {
+                                "confirm": {
+                                    "show": false,
+                                    "label": "ตกลง",
+                                    "color": "primary"
+                                },
+                                "cancel": {
+                                    "show": false,
+                                    "label": "ยกเลิก"
+                                }
+                            },
+                            "dismissible": true
+                        }).afterClosed().subscribe((res) => {
+
+                            this._router.navigateByUrl('location/list')
+                        })
                     },
                     error: (err: any) => {
                         this._fuseConfirmationService.open({
@@ -242,6 +264,24 @@ export class NewLocationComponent implements OnInit, AfterViewInit, OnDestroy {
             image: '',
         });
         console.log(this.formData.value)
+    }
+
+
+    showFlashMessage(type: 'success' | 'error'): void {
+        // Show the message
+        this.flashMessage = type;
+
+        // Mark for check
+        this._changeDetectorRef.markForCheck();
+
+        // Hide it after 3 seconds
+        setTimeout(() => {
+
+            this.flashMessage = null;
+
+            // Mark for check
+            this._changeDetectorRef.markForCheck();
+        }, 3000);
     }
 
 

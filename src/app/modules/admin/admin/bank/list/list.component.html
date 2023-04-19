@@ -133,7 +133,7 @@
                                             <div *ngIf="item.status === 'No'"> ปิดการใช้งาน</div>
                                         </td>
                                         <td style="width: 5%;">{{ item.create_by }}</td>
-                                        <td>{{ item.created_at }}</td>
+                                        <td>{{ item.created_at | date : 'dd-MM-yyyy hh:mm a ' }}</td>
                                         <td style="width: 15%;">
                                             <button mat-button (click)="edit(item.id)">
                                                 <mat-icon>edit</mat-icon>

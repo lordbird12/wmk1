@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    // API_URL: 'http://localhost:9080/wmk-api/public/',
     API_URL: 'https://demo.wmk1.net/api/public/',
 };
 

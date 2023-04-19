@@ -41,7 +41,7 @@
                         <td>{{ pages.begin + (i + 1) }}</td>
                         <td>{{ item.name }}</td>
                         <td>Admin</td>
-                        <td>{{ item.created_at }}</td>
+                        <td>{{ item.created_at | date : 'dd-MM-yyyy hh:mm a ' }}</td>
                         <td>
                             <button mat-button (click)="showPicture(item.image)">
                                 <mat-icon>image</mat-icon>

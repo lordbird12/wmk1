@@ -308,7 +308,7 @@ export class NewDepositComponent implements OnInit, AfterViewInit, OnDestroy {
                             },
                             "dismissible": true
                         });
-                        console.log(err.error.message)
+                        // console.log(err.error.message)
                     }
                 })
             }

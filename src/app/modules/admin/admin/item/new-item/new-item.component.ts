@@ -179,7 +179,30 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._Service.NewItem(formData).subscribe(
                     {
                         next: (resp: any) => {
-                            this._router.navigateByUrl('item/list').then(() => { })
+                            this._fuseConfirmationService.open({
+                                "title": "สร้างข้อมูลอุปกรณ์",
+                                "message": "บันทึกเรียบร้อย",
+                                "icon": {
+                                    "show": true,
+                                    "name": "heroicons_outline:check-circle",
+                                    "color": "success"
+                                },
+                                "actions": {
+                                    "confirm": {
+                                        "show": false,
+                                        "label": "ตกลง",
+                                        "color": "primary"
+                                    },
+                                    "cancel": {
+                                        "show": false,
+                                        "label": "ยกเลิก"
+                                    }
+                                },
+                                "dismissible": true
+                            }).afterClosed().subscribe((res) => {
+    
+                                this._router.navigateByUrl('item/list')
+                            })
                         },
                         error: (err: any) => {
 

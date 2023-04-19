@@ -269,7 +269,30 @@ export class EditLocationComponent implements OnInit, AfterViewInit, OnDestroy {
                     {
                         next: (res: any) => {
                             this.showFlashMessage('success');
-                            this._router.navigateByUrl('location/list').then(() => { });
+                            this._fuseConfirmationService.open({
+                                "title": "แก้ไขข้อมูลห้องเก็บอุปกรณ์",
+                                "message": "บันทึกเรียบร้อย",
+                                "icon": {
+                                    "show": true,
+                                    "name": "heroicons_outline:check-circle",
+                                    "color": "success"
+                                },
+                                "actions": {
+                                    "confirm": {
+                                        "show": false,
+                                        "label": "ตกลง",
+                                        "color": "primary"
+                                    },
+                                    "cancel": {
+                                        "show": false,
+                                        "label": "ยกเลิก"
+                                    }
+                                },
+                                "dismissible": true
+                            }).afterClosed().subscribe((res) => {
+    
+                                this._router.navigateByUrl('location/list')
+                            })
                         },
                         error: (err: any) => {
                             this._fuseConfirmationService.open({
