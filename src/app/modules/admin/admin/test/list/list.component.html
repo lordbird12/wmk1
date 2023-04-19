@@ -10,20 +10,28 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">
-            รายการห้องเก็บอุปกรณ์
-        </div>
+        <div class="text-4xl font-extrabold tracking-tight">คำคม</div>
         <!-- Actions -->
-        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        <div
+            *ngIf="roleType == 'marketing'"
+            class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4"
+        >
             <!-- Add product button -->
-            <a (click)="new()" class="ml-4" mat-flat-button [color]="'primary'">
+            <a
+                routerLink="../../word/new"
+                class="ml-4"
+                mat-flat-button
+                [color]="'primary'"
+            >
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">เพิ่มห้องเก็บอุปกรณ์ใหม่</span>
+                <span class="ml-2 mr-1">เพิ่มใหม่</span>
             </a>
         </div>
     </div>
+
     <!-- Main -->
     <div class="flex flex-auto overflow-hidden">
+        <!-- Products list -->
         <div
             class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto"
         >
@@ -36,42 +44,21 @@
                 <thead>
                     <tr>
                         <th>ลำดับ</th>
-                        <th>ชื่อที่เก็บ</th>
-                        <th>ตู้เก็บ</th>
-                        <th>ชั้นวาง</th>
-                        <th>คำอธิบาย</th>
-                        <th>สถานะ</th>
+                        <th>พระ</th>
+                        <th>คำคม</th>
                         <th>สร้างโดย</th>
                         <th>วันที่สร้าง</th>
-                        <th>รูปภาพ</th>
+                        <th>รูปปก</th>
                         <th>จัดการ</th>
                     </tr>
                 </thead>
                 <tbody *ngIf="dataRow?.length != 0">
                     <tr *ngFor="let item of dataRow; let i = index">
-                        <td style="width: 5%">{{ pages.begin + (i + 1) }}</td>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.cupboard }}</td>
-                        <td>{{ item.floor }}</td>
-                        <td>{{ item.remark }}</td>
-                        <td>
-                            <div *ngIf="item.status === 'Yes'">
-                                <span
-                                    class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
-                                    >เปิดใช้งาน</span
-                                >
-                            </div>
-                            <div *ngIf="item.status === 'No'">
-                                <span
-                                    class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900"
-                                    >ปิดการใช้งาน</span
-                                >
-                            </div>
-                        </td>
-                        <td>{{ item.create_by }}</td>
-                        <td>
-                            {{ item.created_at }}
-                        </td>
+                        <td>{{ pages.begin + (i + 1) }}</td>
+                        <td>{{ item.monk.name }}</td>
+                        <td style="width: 40%">{{ item.detail }}</td>
+                        <td>Admin</td>
+                        <td>{{ item.created_at ? item.created_at : "" }}</td>
                         <td>
                             <button
                                 mat-button
@@ -84,12 +71,17 @@
                             <button mat-button (click)="edit(item.id)">
                                 <mat-icon>edit</mat-icon>
                             </button>
+                            <button mat-button (click)="delete(item.id)">
+                                <mat-icon
+                                    svgIcon="heroicons_solid:trash"
+                                ></mat-icon>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="dataRow?.length == 0">
                     <tr>
-                        <td colspan="8" class="no-data-available text-center">
+                        <td colspan="9" class="no-data-available text-center">
                             ไม่มีข้อมูล !
                         </td>
                     </tr>

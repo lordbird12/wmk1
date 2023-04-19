@@ -9,7 +9,7 @@
                 <h2
                     class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
                 >
-                    สร้างบทสวดมนต์
+                    แก้ไขคำคม
                 </h2>
             </div>
         </div>
@@ -24,51 +24,42 @@
             <div class="flex flex-col sm:flex-row p-8">
                 <div class="flex flex-auto flex-wrap">
                     <div class="flex flex-col w-full lg:w-3/4">
-                        <!-- <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                            <!--firstname and lastname-->
                             <div class="flex">
                                 <mat-form-field class="w-full">
-                                    <mat-label>หมวดหมู่บทสวดมนต์
-                                    </mat-label>
-                                    <mat-select [formControlName]="'blog_category_id'">
+                                    <mat-label class="font-bold">พระ</mat-label>
+                                    <mat-select [formControlName]="'monk_id'">
                                         <mat-option [value]="''">
-                                            <span>เลือกหมวดหมู่บทสวดมนต์</span>
+                                            <span>เลือกพระ</span>
                                         </mat-option>
-                                        <mat-option *ngFor="let item of blogData" [value]="item.id">
-                                            {{item.name}}
+                                        <mat-option
+                                            *ngFor="let item of blogData"
+                                            [value]="item.id"
+                                        >
+                                            {{ item.name }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                        </div> -->
-
+                        </div>
                         <!-- Name, SKU & etc. -->
-                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                        <!-- <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
                             <div class="flex">
                                 <mat-form-field class="w-full">
-                                    <mat-label class="font-bold"
-                                        >ชื่อบทสวดมนต์
+                                    <mat-label>ชื่อบทสวดมนต์
                                     </mat-label>
-                                    <input
-                                        matInput
-                                        [formControlName]="'title'"
-                                    />
+                                    <input matInput [formControlName]="'name'">
                                 </mat-form-field>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                        <!-- <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
                             <mat-form-field class="w-full">
-                                <mat-label class="font-bold"
-                                    >รายละเอียดย่อ</mat-label
-                                >
-                                <textarea
-                                    matInput
-                                    rows="7"
-                                    [formControlName]="'shot_detail'"
-                                    placeholder="กรุณาระบุรายละเอียด"
-                                ></textarea>
+                                <mat-label class="font-bold">รายละเอียด</mat-label>
+                                <textarea matInput rows="7" [formControlName]="'description'" placeholder="กรุณาระบุรายละเอียด"></textarea>
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                         <div class="flex flex-col w-full lg:w-4/4 mt-3 sm:pl-8">
                             <div class="editor">
@@ -82,7 +73,7 @@
                                 </ngx-editor-menu>
                                 <ngx-editor
                                     [editor]="editor"
-                                    [formControlName]="'detail'"
+                                    formControlName="detail"
                                 >
                                 </ngx-editor>
                             </div>
@@ -117,17 +108,6 @@
                                 </dd>
                             </div>
                         </div>
-
-                        <!-- <div class="flex flex-col w-full lg:w-4/4 mt-3 sm:pl-8">
-
-                            <div class="flex">
-                                <mat-form-field class="w-full">
-                                    <mat-label class="font-bold">คีย์เวิด ตัวอย่าง=> (ขนส่งสินค้า,เรือ,บริการขนส่ง) คีย์เวิดเหล่านี้จะถูกนำมาคำนวนคะแนนในบทความ
-                                    </mat-label>
-                                    <input matInput [formControlName]="'tags'" placeholder="ขนส่งสินค้า,เรือ,บริการขนส่ง">
-                                </mat-form-field>
-                            </div>
-                        </div> -->
                     </div>
                     <!-- <div class="flex flex-col w-full lg:w-1/4">
                         <div class="flex flex-col items-center mt-2">
@@ -145,6 +125,8 @@
                             </div>
                         </div>
                         <div class="flex flex-col items-center mt-2">
+
+
                             <ng-container *ngFor="let item of keyData; let i = index">
                                 <div class="w-full flex-col border-b mb-2">
                                     <div class="flex items-center">
@@ -168,9 +150,9 @@
                                 </div>
                             </ng-container>
                         </div>
-                    </div> -->
+                    </div>
 
-                    <!-- <div class="flex flex-col w-full lg:w-4/4">
+                    <div class="flex flex-col w-full lg:w-4/4">
                         <b>
                             -​คีย์หลักควรมีใน title ตรงหน้าหรือกลางประโยค
                             -มีใน description​ ตรงหน้าหรือกลางประโยค
@@ -182,18 +164,14 @@
         </form>
         <div class="flex items-center justify-end w-full border-t px-8 py-4">
             <div class="flex items-center justify-end">
-                <!-- <button class="px-6 ml-3 mat-accent" mat-flat-button (click)="checkkeyword()">
-                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
-                    ตรวจ SEO
-                </button> -->
-                <a class="ml-4" mat-flat-button (click)="goBack()">
+                <a class="ml-4" mat-flat-button href="word/list">
                     <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
                     ยกเลิก
                 </a>
                 <button
                     class="px-6 ml-3 mat-primary"
                     mat-flat-button
-                    (click)="create()"
+                    (click)="update()"
                 >
                     <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
                     ยืนยัน

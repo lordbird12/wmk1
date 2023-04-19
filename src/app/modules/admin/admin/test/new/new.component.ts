@@ -19,6 +19,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {
     debounceTime,
+    lastValueFrom,
     map,
     merge,
     Observable,
@@ -36,14 +37,16 @@ import { sortBy, startCase } from 'lodash-es';
 import { AssetType, Pagination } from '../page.types';
 import { Service } from '../page.service';
 import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
+import { LocationService } from '../../location/location.service';
 
 @Component({
-    selector: 'edit',
-    templateUrl: './edit.component.html',
-    styleUrls: ['./edit.component.scss'],
+    selector: 'new',
+    templateUrl: './new.component.html',
+    styleUrls: ['./new.component.scss'],
+
     animations: fuseAnimations,
 })
-export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
     files: File[] = [];
@@ -61,10 +64,6 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         ['align_left', 'align_center', 'align_right', 'align_justify'],
         ['horizontal_rule', 'format_clear'],
     ];
-    blogData: any = [];
-    keyData: any = [];
-    keyData2: any = 0
-
     statusData: any = [
         { value: true, name: 'เปิดใช้งาน' },
         { value: false, name: 'ปิดใช้งาน' },
@@ -74,9 +73,6 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         { value: true, name: 'เปิดแจ้งเตือน' },
         { value: false, name: 'ไม่แจ้งเตือน' },
     ];
-
-    Id: string;
-    itemData: any = [];
 
     formData: FormGroup;
     flashErrorMessage: string;
@@ -88,12 +84,10 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     tagsEditMode: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
-
-    // me: any | null;
-    // get roleType(): string {
-    //     return 'marketing';
-    // }
-
+    locationData: any = [];
+    blogData: any = [];
+    keyData: any = [];
+    keyData2: any = 0;
     supplierId: string | null;
     pagination: Pagination;
 
@@ -108,16 +102,11 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         private _matDialog: MatDialog,
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
-        private _authService: AuthService
+        private _authService: AuthService,
+        private _ServiceLocation: LocationService,
     ) {
-        this.formData = this._formBuilder.group({
-            id: ['', Validators.required],
-            monk_id: '',
-            name: '',
-            detail: '',
-            status: '',
 
-        });
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -127,22 +116,20 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * On init
      */
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+        this.formData = this._formBuilder.group({
+            name: '',
+            location_id: [''],
+            qty: '',
+            remark: '',
+            image: ''
+        });
+
+        const location = await lastValueFrom(this._ServiceLocation.getLocation())
+        this.locationData = location.data
+
         this.getMonk();
         this.editor = new Editor();
-        this.Id = this._activatedRoute.snapshot.paramMap.get('id');
-        this._Service.getById(this.Id).subscribe((resp: any) => {
-            this.itemData = resp.data;
-            console.log('itemData', this.itemData)
-            this.formData.patchValue({
-                id: this.itemData.id,
-                monk_id: parseInt(this.itemData.monk_id),
-                detail: this.itemData.detail,
-                status: this.itemData.status
-
-            });
-            this._changeDetectorRef.detectChanges();
-        });
     }
 
     getMonk(): void {
@@ -150,8 +137,6 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             this.blogData = resp.data;
         });
     }
-
-    discard(): void { }
 
     /**
      * After view init
@@ -165,29 +150,23 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         // Unsubscribe from all subscriptions
     }
 
-
     checkkeyword(): void {
         this._Service.checkKeyword(this.formData.value).subscribe((resp) => {
             this.keyData = resp.data[0].keys;
             this.keyData2 = resp.data[0].point;
 
-            console.log(this.keyData2);
         });
 
         this._changeDetectorRef.detectChanges();
     }
 
-    update(): void {
+    create(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
-        // Return if the form is invalid
-        // if (this.formData.invalid) {
-        //     return;
-        // }
-        // Open the confirmation dialog
+
         const confirmation = this._fuseConfirmationService.open({
-            title: 'แก้ไขรายการ',
-            message: 'คุณต้องการแก้ไขรายการใช่หรือไม่ ',
+            title: 'สร้างรายการใหม่',
+            message: 'คุณต้องการสร้างรายการใหม่ใช่หรือไม่ ',
             icon: {
                 show: false,
                 name: 'heroicons_outline:exclamation',
@@ -206,7 +185,6 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             dismissible: true,
         });
-
         // Subscribe to the confirmation dialog closed action
         confirmation.afterClosed().subscribe((result) => {
             // If the confirm button pressed...
@@ -217,8 +195,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                 Object.entries(formValue).forEach(([key, value]: any[]) => {
                     formData.append(key, value);
                 });
-                // Disable the form
-                this._Service.update(formData).subscribe({
+
+                this._Service.create(formData).subscribe({
                     next: (resp: any) => {
                         this._router
                             .navigateByUrl('word/list')
@@ -246,7 +224,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                             },
                             dismissible: true,
                         });
-                        // console.log(err.error.message)
+                        // console.log(err.error.message);
                     },
                 });
             }
@@ -267,7 +245,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     onRemove(event) {
         this.files.splice(this.files.indexOf(event), 1);
         this.formData.patchValue({
-            image: '',
+            image: [],
         });
     }
 
@@ -288,6 +266,6 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     goBack(): void {
-        this._router.navigate(['word/list']);
+        this._router.navigate(['test/list']);
     }
 }

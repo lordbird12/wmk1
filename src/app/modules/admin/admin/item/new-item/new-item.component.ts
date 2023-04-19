@@ -132,7 +132,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    CreateItem(): void {
+    create(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid

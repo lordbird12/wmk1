@@ -116,7 +116,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             name: '',
             detail: '',
             status: '',
-
+       
         });
     }
 
@@ -139,7 +139,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                 monk_id: parseInt(this.itemData.monk_id),
                 detail: this.itemData.detail,
                 status: this.itemData.status
-
+             
             });
             this._changeDetectorRef.detectChanges();
         });
@@ -151,12 +151,12 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    discard(): void { }
+    discard(): void {}
 
     /**
      * After view init
      */
-    ngAfterViewInit(): void { }
+    ngAfterViewInit(): void {}
 
     /**
      * On destroy
@@ -222,7 +222,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                     next: (resp: any) => {
                         this._router
                             .navigateByUrl('word/list')
-                            .then(() => { });
+                            .then(() => {});
                     },
                     error: (err: any) => {
                         this._fuseConfirmationService.open({
@@ -285,9 +285,5 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             // Mark for check
             this._changeDetectorRef.markForCheck();
         }, 3000);
-    }
-
-    goBack(): void {
-        this._router.navigate(['word/list']);
     }
 }

@@ -204,7 +204,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    updateItem(): void {
+    update(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
