@@ -187,7 +187,7 @@ export class ListBankComponent implements OnInit, AfterViewInit, OnDestroy {
                         this.pages.per_page = resp.per_page;
                         if (resp.current_page > 1) {
                             this.pages.begin =
-                                resp.per_page * resp.current_page - 1;
+                                 resp.per_page * (resp.current_page - 1);
                         } else {
                             this.pages.begin = 0;
                         }

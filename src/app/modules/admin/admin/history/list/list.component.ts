@@ -133,7 +133,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                         this.pages.per_page = resp.per_page;
                         if (resp.current_page > 1) {
                             this.pages.begin =
-                                resp.per_page * resp.current_page - 1;
+                                resp.per_page * (resp.current_page - 1);
                         } else {
                             this.pages.begin = 0;
                         }
@@ -223,7 +223,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     edit(id: string): void {
-        this._router.navigate(['word/edit/' + id]);
+        this._router.navigate(['user/edit/' + id]);
     }
 
     delete(id: any): void {
@@ -290,4 +290,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     textStatus(status: string): string {
         return startCase(status);
     }
+
+
 }

@@ -17,6 +17,7 @@ import { PositionService } from '../../position/position.service';
 import { DepartmentService } from '../../department/department.service';
 import { BranchService } from '../../branch/branch.service';
 import { NgxMatTimepickerHoursFaceDirective } from 'ngx-mat-timepicker/lib/components/ngx-mat-timepicker-hours-face/ngx-mat-timepicker-hours-face.directive';
+import { DataTableDirective } from 'angular-datatables';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 
 @Component({
@@ -39,7 +40,8 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
         { id: 5, name: 'Manager' },
         { id: 6, name: 'ทีมยิงad' },
     ]
-
+    @ViewChild(DataTableDirective)
+    dtElement!: DataTableDirective;
     departmentData: any = []
     positionData: any = []
     permissionData: any = []
@@ -62,12 +64,15 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
     tagsEditMode: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
+    public dtOptions: DataTables.Settings = {};
+
+    dataId: any;
 
     // me: any | null;
     // get roleType(): string {
     //     return 'marketing';
     // }
-
+    dataRow: any = [];
     supplierId: string | null;
     pagination: UserPagination;
 
@@ -99,7 +104,8 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
             email: ['', Validators.required],
             image: ['',],
             phone: ['',],
-            line_token: ['',]
+            line_token: ['',],
+            password: ['',],
         })
     }
 
@@ -113,10 +119,9 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     async ngOnInit(): Promise<void> {
+        this.dataId = this._activatedRoute.snapshot.params.id
         this.formData.reset();
-        // this._ServiceBranch.getBranch().subscribe((resp: any) => {
-        //     this.branchData = resp.data;
-        // })
+        this.loadTable();
         const department = await lastValueFrom(this._ServiceDepartment.getDepartment())
         this.departmentData = department.data;
 
@@ -126,28 +131,37 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
         const permission = await lastValueFrom(this._Service.getPermission())
         this.permissionData = permission.data;
 
-        this._activatedRoute.params.subscribe(params => {
-            const id = params.id;
-            this._Service.getUserbyId(id).subscribe((resp: any) => {
-                this.DatabyId = resp.data
-                console.log(this.DatabyId)
-                this.formData.patchValue({
-                    id: this.DatabyId.id,
-                    user_id: this.DatabyId.user_id,
-                    department_id: +this.DatabyId.department_id,
-                    email: this.DatabyId.email,
-                    name: this.DatabyId.name,
-                    permission_id: +this.DatabyId.permission_id,
-                    position_id: +this.DatabyId.position_id,
-                    phone: this.DatabyId.phone,
-                    status: this.DatabyId.status,
-                    line_token: this.DatabyId.line_token,
-                })
-                this.url_pro = this.DatabyId.image
-            })
-            // this.image(this.DatabyId.image)
+        // const Id =await lastValueFrom(this._activatedRoute.queryParams)
 
-        });
+        const dataRaw: any = await lastValueFrom(this._Service.getUserbyId(this.dataId))
+        console.log(dataRaw)
+        this.formData.patchValue({
+            id: dataRaw.data.id,
+            user_id: dataRaw.data.user_id,
+            department_id: +dataRaw.data.department_id,
+            email: dataRaw.data.email,
+            name: dataRaw.data.name,
+            permission_id: +dataRaw.data.permission_id,
+            position_id: +dataRaw.position_id,
+            phone: dataRaw.data.phone,
+            status: dataRaw.data.status,
+            line_token: dataRaw.data.line_token,
+        })
+
+        this._Service.getUserbyId(this.dataId).subscribe( (resp: any) => {
+            this.DatabyId = resp.data
+            this.url_pro = this.DatabyId.image
+            this.rerender();
+        })
+
+        // this._activatedRoute.params.subscribe(params => {
+        //     const id = params.id;
+
+
+
+        // });
+
+        this._changeDetectorRef.markForCheck();
 
     }
 
@@ -167,7 +181,8 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
-
+        this._unsubscribeAll.next(null);
+        this._unsubscribeAll.complete();
     }
 
     UpdateUser(): void {
@@ -292,10 +307,6 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         console.log(this.formData.value)
     }
-
-
-
-
     onSelectSignature(event) {
         console.log(event);
         this.filesSignature.push(...event.addedFiles);
@@ -358,5 +369,59 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
     goBack(): void {
         this._router.navigate(['user/list']);
     }
+
+    pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
+    loadTable():void {
+
+        const that = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            serverSide: true,
+            processing: true,
+            responsive: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
+            },
+            ajax: (dataTablesParameters: any, callback) => {
+                dataTablesParameters.user_id = this.formData.value.user_id
+                that._Service
+                    .getPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow = resp.data;
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * (resp.current_page - 1);
+                        } else {
+                            this.pages.begin = 0;
+                        }
+
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
+                    });
+            },
+            columns: [
+                { data: 'no' },
+                { data: 'monk' },
+                { data: 'name' },
+                { data: 'image' },
+                { data: 'create_by' },
+                { data: 'created_at' },
+            ],
+        };
+    }
+
+    rerender(): void {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.ajax.reload();
+        });
+      }
 
 }
