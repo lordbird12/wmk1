@@ -348,6 +348,13 @@ export const appRoutes: Route[] = [
                     { path: '', loadChildren: () => import('app/modules/admin/admin/test/page.module').then(m => m.Module) },
                 ]
             },
+            {
+                path: 'history',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/history/page.module').then(m => m.Module) },
+                ]
+            },
+
 
             // {
             //     path: 'video',

@@ -153,7 +153,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                             return AuthService._menu7; // must be a boolean value
                         },
                     },
-                    {   
+                    {
                         id: 'position',
                         title: 'ตำแหน่ง',
                         type: 'collapsable',
@@ -204,6 +204,26 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 link: '/department/new',
                             },
                         ],
+                    },
+                    {
+                        id: 'list-history',
+                        title: 'ประวัติเข้าใช้งาน',
+                        type: 'basic',
+                        // icon: 'heroicons_outline:clipboard-check',
+                        link: '/history/list',
+                        hidden: function () {
+                            return AuthService._menu6; // must be a boolean value
+                        },
+                    },
+                    {
+                        id: 'list-history-admin',
+                        title: 'ประวัติเข้าใช้งานกรรมการ',
+                        type: 'basic',
+                        // icon: 'heroicons_outline:clipboard-check',
+                        link: '/history/list-admin',
+                        hidden: function () {
+                            return AuthService._menu6; // must be a boolean value
+                        },
                     },
                 ],
             },
@@ -374,15 +394,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
         ],
     },
-   
+
     // {
     //     id: 'gallery',
     //     title: 'จัดการแกลลอรี่',
     //     type: 'group',
     //     icon: 'heroicons_outline:view-grid',
-     
+
     //     children: [
-        
+
     //     ],
     // },
     {
@@ -632,7 +652,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                             // {
                             //     title: 'หมวดหมู่ข่าว',
                             //     type: 'collapsable',
-                               
+
                             //     hidden: function () {
                             //         return AuthService._menu25; // must be a boolean value
                             //     },
