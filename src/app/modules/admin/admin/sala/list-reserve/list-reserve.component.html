@@ -38,16 +38,22 @@
                 <tbody *ngIf="dataRow?.length != 0">
                     <tr *ngFor="let item of dataRow; let i = index">
                         <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
-                        <td style="width: 20%;">{{ item.name }}</td>
-                        <td style="width: 20%;">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.tel }}</td>
+                        <td>{{ item.tax }}</td>
+                        <td>
                             {{ item.remark}}
                         </td>
                         <td>
+                            <div *ngIf="item.status === 'Request'">
+                                <span class="bg-yellow-100 text-yellow-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ร้องขอ</span>
+                            </div>
                             <div *ngIf="item.status === 'Yes'">
-                                <span class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดใช้งาน</span>
+                                <span class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">อนุมัติ</span>
                             </div>
                             <div *ngIf="item.status === 'No'">
-                                <span class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
+                                <span class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่อนุมัติ</span>
                             </div>
                         </td>
                         <td>{{ item.create_by }}</td>
