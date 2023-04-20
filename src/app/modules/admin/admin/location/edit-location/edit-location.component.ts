@@ -119,10 +119,10 @@ export class EditLocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.formData = this._formBuilder.group({
             id: '',
-            name: ['', Validators.required],
-            cupboard: ['', Validators.required],
-            floor: ['', Validators.required],
-            remark: ['', Validators.required],
+            name: [''],
+            cupboard: [''],
+            floor: [''],
+            remark: [''],
             status: '',
 
         })
@@ -228,7 +228,7 @@ export class EditLocationComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    Update(): void {
+    update(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid

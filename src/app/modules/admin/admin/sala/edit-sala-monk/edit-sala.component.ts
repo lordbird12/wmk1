@@ -125,7 +125,7 @@ export class EditSalaComponent implements OnInit, AfterViewInit, OnDestroy {
         // Unsubscribe from all subscriptions
 
     }
-    updateItem(): void {
+    update(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid

@@ -131,7 +131,7 @@ export class EditReserveSalaComponent implements OnInit, AfterViewInit, OnDestro
         // Unsubscribe from all subscriptions
 
     }
-    updateReserve(): void {
+    update(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid

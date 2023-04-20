@@ -19,6 +19,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {
     debounceTime,
+    lastValueFrom,
     map,
     merge,
     Observable,
@@ -36,6 +37,7 @@ import { sortBy, startCase } from 'lodash-es';
 import { AssetType, Pagination } from '../page.types';
 import { Service } from '../page.service';
 import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
+import { LocationService } from '../../location/location.service';
 
 @Component({
     selector: 'edit',
@@ -49,6 +51,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     files: File[] = [];
     files2: File[] = [];
     editor: Editor;
+    url_sig: any = []
+    url: any = []
+    locationData: any = [];
     toolbar: Toolbar = [
         // default value
         ['bold', 'italic'],
@@ -108,7 +113,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         private _matDialog: MatDialog,
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
-        private _authService: AuthService
+        private _authService: AuthService,
+        private _ServiceLocation: LocationService,
     ) {
         this.formData = this._formBuilder.group({
             id: ['', Validators.required],
@@ -116,7 +122,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             name: '',
             detail: '',
             status: '',
-       
+
         });
     }
 
@@ -127,8 +133,10 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * On init
      */
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.getMonk();
+        const location = await lastValueFrom(this._ServiceLocation.getLocation())
+        this.locationData = location.data
         this.editor = new Editor();
         this.Id = this._activatedRoute.snapshot.paramMap.get('id');
         this._Service.getById(this.Id).subscribe((resp: any) => {
@@ -139,7 +147,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                 monk_id: parseInt(this.itemData.monk_id),
                 detail: this.itemData.detail,
                 status: this.itemData.status
-             
+
             });
             this._changeDetectorRef.detectChanges();
         });
@@ -151,18 +159,35 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    discard(): void {}
+    discard(): void { }
 
     /**
      * After view init
      */
-    ngAfterViewInit(): void {}
+    ngAfterViewInit(): void { }
 
     /**
      * On destroy
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
+    }
+
+    onChange(event: any): void {
+        // console.log('')
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        setTimeout(() => {
+            this._changeDetectorRef.detectChanges()
+        }, 150)
+        reader.onload = (e: any) =>
+            this.url = e.target.result;
+        const file = event.target.files[0];
+        this.formData.patchValue({
+            image: file
+        });
+        this._changeDetectorRef.markForCheck();
+        // console.log
     }
 
 
@@ -222,7 +247,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                     next: (resp: any) => {
                         this._router
                             .navigateByUrl('word/list')
-                            .then(() => {});
+                            .then(() => { });
                     },
                     error: (err: any) => {
                         this._fuseConfirmationService.open({
@@ -285,5 +310,10 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             // Mark for check
             this._changeDetectorRef.markForCheck();
         }, 3000);
+    }
+
+
+    goBack(): void {
+        this._router.navigate(['test/list']);
     }
 }

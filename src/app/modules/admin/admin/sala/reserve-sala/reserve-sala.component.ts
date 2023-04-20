@@ -148,7 +148,7 @@ export class ReserveSalaComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    addMonk(): void {
+    create(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid

@@ -96,7 +96,7 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): void {
 
         this.formData = this._formBuilder.group({
-            name: ['', Validators.required],
+            name: [''],
             description: '',
             email: '',
             price: '',
@@ -135,7 +135,7 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    createSala(): void {
+    create(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid

@@ -17,13 +17,19 @@
 
     <!-- Main -->
     <div class="flex-auto p-3 sm:p-10">
-        <form [formGroup]="formData">
-            <div class="w-full">
-                <div class="flex flex-auto flex-wrap">
-                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
-                        <div class="flex p-5">
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>เลิอกวันที่จองศาลา</mat-label>
+        <div class="flex flex-col sm:flex-row p-8 w-full justify-between">
+            <section class="bg-white dark:bg-gray-900 w-full">
+                <form action="#" class="space-y-8" [formGroup]="formData">
+                    <div
+                        class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md w-full"
+                    >
+                        <div>
+                            <mat-form-field class="w-full">
+                                <mat-label
+                                    for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >เลือกวันที่จองศาลา</mat-label
+                                >
                                 <mat-date-range-input [rangePicker]="picker">
                                     <input
                                         matStartDate
@@ -44,8 +50,14 @@
                                     #picker
                                 ></mat-date-range-picker>
                             </mat-form-field>
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>เลือกศาลา</mat-label>
+                        </div>
+                        <div>
+                            <mat-form-field class="w-full">
+                                <mat-label
+                                    for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >เลือกศาลา</mat-label
+                                >
                                 <mat-select [formControlName]="'sala_id'">
                                     <mat-option [value]="">
                                         เลือกศาลา
@@ -59,62 +71,78 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="flex p-5">
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>ชื่อผู้ติดต่อ</mat-label>
-                                <input
-                                    matInput
-                                    [formControlName]="'name'"
-                                    placeholder="ระบุชื่อผู้ติดต่อ"
-                                />
-                            </mat-form-field>
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>อีเมล</mat-label>
-                                <input
-                                    matInput
-                                    [formControlName]="'email'"
-                                    placeholder="ระบุชื่อผู้ติดต่อ"
-                                />
+                        <div>
+                            <mat-form-field class="w-full">
+                                <mat-label
+                                    for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >ชื่อผู้ติดต่อ</mat-label
+                                >
+                                <input matInput [formControlName]="'name'" />
                             </mat-form-field>
                         </div>
-                        <div class="flex p-5">
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>เบอร์ติดต่อ</mat-label>
+                        <div>
+                            <mat-form-field class="w-full">
+                                <mat-label
+                                    for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >อีเมล</mat-label
+                                >
+                                <input matInput [formControlName]="'email'" />
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="w-full">
+                                <mat-label
+                                    for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >เบอร์ติดต่อ</mat-label
+                                >
                                 <input matInput [formControlName]="'tel'" />
                             </mat-form-field>
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>เลขประจำตัวผู้เสียภาษี</mat-label>
-                                <input
-                                    matInput
-                                    [formControlName]="'tax_id'"
-                                    placeholder="เลขประจำตัวผู้เสียภาษี"
-                                />
+                        </div>
+                        <div>
+                            <mat-form-field class="w-full">
+                                <mat-label
+                                    for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >เลขประจำตัวผู้เสียภาษี</mat-label
+                                >
+                                <input matInput [formControlName]="'tax_id'" />
                             </mat-form-field>
                         </div>
-                        <div class="flex p-5 w-full">
+                        <div class="sm:col-span-2">
                             <mat-form-field class="w-full pr-2">
-                                <mat-label>รายละเอียด</mat-label>
+                                <mat-label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >รายละเอียด</mat-label
+                                >
                                 <textarea
                                     matInput
                                     rows="4"
                                     [formControlName]="'remark'"
+                                    placeholder="กรุณาระบุรายละเอียด"
                                 ></textarea>
                             </mat-form-field>
                         </div>
-                        <div class="flex p-5 w-full">
+                        <div class="sm:col-span-2">
                             <mat-form-field class="w-full pr-2">
-                                <mat-label>ที่อยู่ผู้จอง</mat-label>
+                                <mat-label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >ที่อยู่ผู้จอง</mat-label
+                                >
                                 <textarea
                                     matInput
                                     rows="4"
                                     [formControlName]="'address'"
+                                    placeholder="กรุณาระบุรายละเอียด"
                                 ></textarea>
                             </mat-form-field>
                         </div>
                     </div>
-                </div>
-            </div>
-        </form>
+                </form>
+            </section>
+        </div>
         <div class="flex items-center justify-end w-full border-t px-8 py-4">
             <div class="flex items-center justify-end">
                 <a class="ml-4" mat-flat-button (click)="goBack()">
@@ -124,7 +152,7 @@
                 <button
                     class="px-6 ml-3 mat-primary"
                     mat-flat-button
-                    (click)="addMonk()"
+                    (click)="create()"
                 >
                     <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
                     ยืนยัน
