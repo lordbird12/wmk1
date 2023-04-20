@@ -53,8 +53,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     files: File[] = [];
     supplierId: string | null;
     pagination: CustomerPagination;
-    rentTypeData: any = [ 'Day', 'Week', 'Month', '3 Month', '6 Month', 'Year', '3 Year', '6 Year']
-    categoryData: any = ['Event', 'Land' ]
+    rentTypeData: any = ['Day', 'Week', 'Month', '3 Month', '6 Month', 'Year', '3 Year', '6 Year']
+    categoryData: any = ['Event', 'Land']
     positionData: any = []
     /**
      * Constructor
@@ -98,7 +98,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * On init
      */
-     ngOnInit(): void {
+    ngOnInit(): void {
 
         // const category = await lastValueFrom(this._Service.getCategory())
         // this.categoryData = category.data
@@ -241,5 +241,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.formData.value)
     }
 
+    goBack(): void {
+        this._router.navigate(['land/list']);
+    }
 
 }

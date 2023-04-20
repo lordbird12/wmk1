@@ -120,7 +120,7 @@ export class NewBankWithdrawComponent implements OnInit, AfterViewInit, OnDestro
             price: '',
             type: 'withdraw',
             remark: '',
-            date:'',
+            date: '',
             images: []
         })
 
@@ -199,11 +199,11 @@ export class NewBankWithdrawComponent implements OnInit, AfterViewInit, OnDestro
                     }
                 );
 
-                for (var i = 0; i < this.files.length; i++) { 
+                for (var i = 0; i < this.files.length; i++) {
 
                     formData.append("images[]", this.files[i]);
-          
-                  }
+
+                }
 
                 this._Service.newTransaction(formData).subscribe({
                     next: (resp: any) => {
@@ -273,5 +273,8 @@ export class NewBankWithdrawComponent implements OnInit, AfterViewInit, OnDestro
         console.log(this.formData.value)
     }
 
+    goBack(): void {
+        this._router.navigate(['bank/list-withdraw']);
+    }
 
 }

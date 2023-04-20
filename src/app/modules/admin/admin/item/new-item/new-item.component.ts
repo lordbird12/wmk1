@@ -132,7 +132,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    CreateItem(): void {
+    create(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
@@ -200,7 +200,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 "dismissible": true
                             }).afterClosed().subscribe((res) => {
-    
+
                                 this._router.navigateByUrl('item/list')
                             })
                         },
@@ -261,5 +261,9 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.formData.value)
     }
 
+
+    goBack(): void {
+        this._router.navigate(['item/list']);
+    }
 
 }

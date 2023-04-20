@@ -190,4 +190,8 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 3000);
     }
 
+    goBack(): void {
+        this._router.navigate(['position/list']);
+    }
+
 }

@@ -235,4 +235,9 @@ export class EditSalaComponent implements OnInit, AfterViewInit, OnDestroy {
         this._changeDetectorRef.markForCheck();
         // console.log
     }
+
+    goBack(): void {
+        this._router.navigate(['sala/list']);
+    }
+
 }

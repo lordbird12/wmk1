@@ -1,15 +1,17 @@
 <div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
-
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
+    >
         <div class="flex-1 min-w-0">
             <!-- Title -->
             <div class="mt-2">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+                >
                     แก้ไขข้อมูลกลุ่มพระสงฆ์
                 </h2>
             </div>
-
         </div>
     </div>
 
@@ -19,28 +21,39 @@
             <div class="flex p-5 w-full">
                 <mat-form-field class="w-full">
                     <mat-label>ชื่อกลุ่มพระสงฆ์</mat-label>
-                    <input matInput [formControlName]="'name'" placeholder="กรุณาระบุชื่อกลุ่ม">
+                    <input
+                        matInput
+                        [formControlName]="'name'"
+                        placeholder="กรุณาระบุชื่อกลุ่ม"
+                    />
                 </mat-form-field>
             </div>
             <div class="flex p-5 w-full">
                 <mat-form-field class="w-full">
                     <mat-label>รายละเอียด</mat-label>
-                    <textarea matInput rows="4" [formControlName]="'description'"></textarea>
+                    <textarea
+                        matInput
+                        rows="4"
+                        [formControlName]="'description'"
+                    ></textarea>
                 </mat-form-field>
             </div>
         </form>
         <div class="flex items-center justify-end w-full border-t px-8 py-4">
             <div class="flex items-center justify-end">
-                <a class="ml-4" mat-flat-button routerLink="../../group-monk/list">
+                <a class="ml-4" mat-flat-button (click)="goBack()">
                     <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
                     ย้อนกลับ
                 </a>
-                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="updateGroupMonk()">
+                <button
+                    class="px-6 ml-3 mat-primary"
+                    mat-flat-button
+                    (click)="updateGroupMonk()"
+                >
                     <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
                     ยืนยัน
                 </button>
             </div>
         </div>
     </div>
-
 </div>

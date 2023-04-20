@@ -203,7 +203,9 @@ export class EditDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
         }, 3000);
     }
 
-
+    goBack(): void {
+        this._router.navigate(['department/list']);
+    }
 
 
 }

@@ -292,5 +292,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.formData.value)
     }
 
+    goBack(): void {
+        this._router.navigate(['user/list']);
+    }
 
 }

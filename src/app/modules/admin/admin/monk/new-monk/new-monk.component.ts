@@ -149,7 +149,7 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * After view init
      */
-    ngAfterViewInit(): void {}
+    ngAfterViewInit(): void { }
 
     /**
      * On destroy
@@ -208,7 +208,7 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
 
                 this._Service.NewItem(formData).subscribe({
                     next: (resp: any) => {
-                        this._router.navigateByUrl('monk/list').then(() => {});
+                        this._router.navigateByUrl('monk/list').then(() => { });
                     },
                     error: (err: any) => {
                         this._fuseConfirmationService.open({
@@ -261,5 +261,9 @@ export class NewMonkComponent implements OnInit, AfterViewInit, OnDestroy {
             image: '',
         });
         console.log(this.formData.value);
+    }
+
+    goBack(): void {
+        this._router.navigate(['monk/list']);
     }
 }

@@ -251,15 +251,13 @@ export class NewBankComponent implements OnInit, AfterViewInit, OnDestroy {
 
             });
             this.removeUser(i);
-
         }
 
     }
 
-
-
-
-
+    goBack(): void {
+        this._router.navigate(['bank/list']);
+    }
 
 
 

@@ -221,10 +221,10 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 "dismissible": true
                             }).afterClosed().subscribe((res) => {
-    
+
                                 this._router.navigateByUrl('sala/list')
                             })
-                         
+
                         },
                         error: (err: any) => {
 
@@ -280,6 +280,10 @@ export class NewSalaComponent implements OnInit, AfterViewInit, OnDestroy {
             image: '',
         });
         console.log(this.formData.value)
+    }
+
+    goBack(): void {
+        this._router.navigate(['sala/list']);
     }
 
 }

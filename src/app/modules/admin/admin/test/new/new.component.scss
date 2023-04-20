@@ -1,0 +1,17 @@
+.dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+::ng-deep {
+    /* to penetrate <ngx-editor> CSS styling */
+    .NgxEditor {
+        height: 400px;
+        overflow-y: scroll;
+    }
+    .NgxEditor__Content {
+        min-height: 400px;
+        /* make all of the editor area clickable */
+    }
+}

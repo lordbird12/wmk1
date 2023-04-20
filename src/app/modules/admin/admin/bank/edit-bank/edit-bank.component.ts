@@ -334,4 +334,8 @@ export class EditBankComponent implements OnInit, AfterViewInit, OnDestroy {
 
     }
 
+    goBack(): void {
+        this._router.navigate(['bank/list']);
+    }
+
 }

@@ -68,8 +68,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     supplierId: string | null;
     pagination: CustomerPagination;
     departmentData: any = []
-    rentTypeData: any = [ 'Day', 'Week', 'Month', '3 Month', '6 Month', 'Year', '3 Year', '6 Year']
-    categoryData: any = ['Event', 'Land' ]
+    rentTypeData: any = ['Day', 'Week', 'Month', '3 Month', '6 Month', 'Year', '3 Year', '6 Year']
+    categoryData: any = ['Event', 'Land']
     positionData: any = []
     /**
      * Constructor
@@ -318,6 +318,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 3000);
     }
 
+    goBack(): void {
+        this._router.navigate(['land/list']);
+    }
 
 
 }

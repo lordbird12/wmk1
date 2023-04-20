@@ -241,6 +241,9 @@ export class LocationListComponent implements OnInit, AfterViewInit, OnDestroy {
     edit(locationId: string): void {
         this._router.navigate(['location/edit/' + locationId]);
     }
+    new(): void {
+        this._router.navigate(['location/new-location']);
+    }
 
     openNewBrief(): void {
         this._router.navigateByUrl('marketing/brief-plan/brief/create');

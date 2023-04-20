@@ -242,7 +242,7 @@ export const appRoutes: Route[] = [
             },
 
 
-//////////website//////////
+            //////////website//////////
 
 
             {
@@ -340,6 +340,12 @@ export const appRoutes: Route[] = [
                 path: 'word',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/admin/word/page.module').then(m => m.Module) },
+                ]
+            },
+            {
+                path: 'test',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/admin/test/page.module').then(m => m.Module) },
                 ]
             },
 

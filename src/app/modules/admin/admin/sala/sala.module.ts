@@ -44,53 +44,56 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReserveSalaComponent } from './reserve-sala/reserve-sala.component';
 import { ListReserveComponent } from './list-reserve/list-reserve.component';
 import { EditReserveSalaComponent } from './edit-reserve-sala/edit-reserve-sala.component';
-
+import { CalendarComponent } from './calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 @NgModule({
-  declarations: [
-    SalaComponent,
-    NewSalaComponent,
-    SalaListComponent,
-    EditSalaComponent,
-    ReserveSalaComponent,
-    ListReserveComponent,
-    EditReserveSalaComponent
-  ],
-  imports: [
-    RouterModule.forChild(salaRoute),
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatRippleModule,
-    MatSortModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    SharedModule,
-    DragDropModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
-    MatTableModule,
-    MatTabsModule,
-    FuseFindByKeyPipeModule,
-    MatSidenavModule,
-    MatButtonToggleModule,
-    MatChipsModule,
-    MatDividerModule,
-    NgImageSliderModule,
-    NgxDropzoneModule,
-    MatRadioModule,
-    MatExpansionModule,
-    NgxMatTimepickerModule.setLocale('en-GB'),
-    DataTablesModule,
-    MatAutocompleteModule
+    declarations: [
+        SalaComponent,
+        NewSalaComponent,
+        SalaListComponent,
+        EditSalaComponent,
+        ReserveSalaComponent,
+        ListReserveComponent,
+        EditReserveSalaComponent,
+        CalendarComponent
+    ],
+    imports: [
+        RouterModule.forChild(salaRoute),
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatMenuModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatRippleModule,
+        MatSortModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        SharedModule,
+        DragDropModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatTableModule,
+        MatTabsModule,
+        FuseFindByKeyPipeModule,
+        MatSidenavModule,
+        MatButtonToggleModule,
+        MatChipsModule,
+        MatDividerModule,
+        NgImageSliderModule,
+        NgxDropzoneModule,
+        MatRadioModule,
+        MatExpansionModule,
+        NgxMatTimepickerModule.setLocale('en-GB'),
+        DataTablesModule,
+        MatAutocompleteModule,
+        FullCalendarModule
 
-  ]
+    ]
 })
 export class SalaModule {
 }

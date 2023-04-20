@@ -231,6 +231,10 @@ export class SalaListComponent implements OnInit, AfterViewInit, OnDestroy {
         return startCase(status);
     }
 
+    calendar(customerId: string): void {
+        this._router.navigate(['/sala/calendar/' + customerId]);
+    }
+
     // openDialog() {
     //     const dialogRef = this._matDialog.open(NewBranchComponent);
     // }

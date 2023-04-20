@@ -209,4 +209,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
                 // this._router.navigate(['./../..'], {relativeTo: this._activatedRoute});
             });
     }
+
+    new(): void {
+        this._router.navigate(['item/new-item']);
+    }
 }

@@ -297,7 +297,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             this._changeDetectorRef.markForCheck();
         }, 3000);
     }
-
+    goBack(): void {
+        this._router.navigate(['sacred/list']);
+    }
 
 
 }

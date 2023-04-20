@@ -79,10 +79,10 @@ export class NewLocationComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): void {
 
         this.formData = this._formBuilder.group({
-            name: ['', Validators.required],
-            cupboard: ['', Validators.required],
-            floor: ['', Validators.required],
-            remark: ['', Validators.required],
+            name: [''],
+            cupboard: [''],
+            floor: [''],
+            remark: [''],
             image: '',
 
         })
@@ -114,7 +114,7 @@ export class NewLocationComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    createLocation(): void {
+    create(): void {
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
@@ -284,6 +284,9 @@ export class NewLocationComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 3000);
     }
 
+    goBack(): void {
+        this._router.navigate(['location/list']);
+    }
 
 
 }

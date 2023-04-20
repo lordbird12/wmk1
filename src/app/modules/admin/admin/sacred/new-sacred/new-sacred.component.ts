@@ -220,5 +220,9 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.formData.value)
     }
 
+    goBack(): void {
+        this._router.navigate(['sacred/list']);
+    }
+
 
 }

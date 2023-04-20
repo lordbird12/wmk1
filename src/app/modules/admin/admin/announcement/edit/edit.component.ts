@@ -150,12 +150,12 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             this.blogData = resp.data;
         });
     }
-    discard(): void {}
+    discard(): void { }
 
     /**
      * After view init
      */
-    ngAfterViewInit(): void {}
+    ngAfterViewInit(): void { }
 
     /**
      * On destroy
@@ -221,7 +221,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
                     next: (resp: any) => {
                         this._router
                             .navigateByUrl('announcement/list')
-                            .then(() => {});
+                            .then(() => { });
                     },
                     error: (err: any) => {
                         this._fuseConfirmationService.open({
@@ -284,5 +284,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
             // Mark for check
             this._changeDetectorRef.markForCheck();
         }, 3000);
+    }
+
+    goBack(): void {
+        this._router.navigate(['announcement/list']);
     }
 }

@@ -236,5 +236,8 @@ export class EditMemberComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
+    goBack(): void {
+        this._router.navigate(['member/list']);
+    }
 
 }
