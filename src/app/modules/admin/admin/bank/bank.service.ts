@@ -78,7 +78,7 @@ export class BankService {
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient) { }
 
     httpOptionsFormdata = {
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
@@ -639,8 +639,8 @@ export class BankService {
         return this._httpClient
             .get<any[]>(
                 environment.API_URL +
-                    'api/brief-osm-comment-by-brief-osm/' +
-                    assetId,
+                'api/brief-osm-comment-by-brief-osm/' +
+                assetId,
                 this.httpOptionsFormdata
             )
             .pipe(
@@ -664,9 +664,9 @@ export class BankService {
         return this._httpClient
             .post(
                 environment.API_URL +
-                    'api/briefs/' +
-                    briefId +
-                    '/approve_asset',
+                'api/briefs/' +
+                briefId +
+                '/approve_asset',
                 data,
                 this.httpOptionsFormdata
             )
@@ -682,9 +682,9 @@ export class BankService {
         return this._httpClient
             .post(
                 environment.API_URL +
-                    'api/briefs/' +
-                    briefId +
-                    '/approve_asset_all',
+                'api/briefs/' +
+                briefId +
+                '/approve_asset_all',
                 data,
                 this.httpOptionsFormdata
             )
@@ -700,9 +700,9 @@ export class BankService {
         return this._httpClient
             .post(
                 environment.API_URL +
-                    'api/briefs-osm-store-file/' +
-                    briefId +
-                    '/approve',
+                'api/briefs-osm-store-file/' +
+                briefId +
+                '/approve',
                 data,
                 this.httpOptionsFormdata
             )
@@ -718,9 +718,9 @@ export class BankService {
         return this._httpClient
             .post(
                 environment.API_URL +
-                    'api/brief-osm-store/' +
-                    briefId +
-                    '/lanlord-confirm',
+                'api/brief-osm-store/' +
+                briefId +
+                '/lanlord-confirm',
                 data,
                 this.httpOptionsFormdata
             )
@@ -935,9 +935,9 @@ export class BankService {
         return this._httpClient
             .put(
                 environment.API_URL +
-                    'api/briefs-osm/' +
-                    osm +
-                    '/update?populate[0]=brief_osm_stores.store&populate[1]=artwork_supplier_id&populate[2]=production_supplier_id&populate[3]=brief_files',
+                'api/briefs-osm/' +
+                osm +
+                '/update?populate[0]=brief_osm_stores.store&populate[1]=artwork_supplier_id&populate[2]=production_supplier_id&populate[3]=brief_files',
                 brief,
                 this.httpOptionsFormdata
             )
@@ -977,7 +977,7 @@ export class BankService {
         return this._httpClient
             .get<Store[]>(
                 environment.API_URL +
-                    'api/store_list?pagination[page]=1&pagination[pageSize]=9999&sort[0]=store_type.id'
+                'api/store_list?pagination[page]=1&pagination[pageSize]=9999&sort[0]=store_type.id'
             )
             .pipe(
                 tap((stores) => {
@@ -1003,9 +1003,9 @@ export class BankService {
                 this._httpClient
                     .post<any>(
                         environment.API_URL +
-                            'api/briefs/' +
-                            briefId +
-                            '/upload_artworks',
+                        'api/briefs/' +
+                        briefId +
+                        '/upload_artworks',
                         artwork,
                         this.httpOptionsFormdata
                     )
@@ -1032,15 +1032,15 @@ export class BankService {
     }
 
     getAssetItems(req: any): Observable<AssetItem> {
-        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1', this.httpOptionsFormdata).pipe(
+        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1').pipe(
         return this._httpClient
             .get<AssetItem>(
                 environment.API_URL +
-                    'api/items?filters[season][$eq]=' +
-                    req.season +
-                    '&filters[division][$eq]=' +
-                    req.division +
-                    '&pagination[limit]=1',
+                'api/items?filters[season][$eq]=' +
+                req.season +
+                '&filters[division][$eq]=' +
+                req.division +
+                '&pagination[limit]=1',
                 this.httpOptionsFormdata
             )
             .pipe(
@@ -1064,7 +1064,7 @@ export class BankService {
         return this._httpClient
             .get<AssetCategory[]>(
                 environment.API_URL +
-                    'api/asset-categories?populate=*&pagination[withCount]=false',
+                'api/asset-categories?populate=*&pagination[withCount]=false',
                 this.httpOptionsFormdata
             )
             .pipe();

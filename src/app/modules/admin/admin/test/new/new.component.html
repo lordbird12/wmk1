@@ -1,136 +1,69 @@
 <div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
     <!-- Header -->
     <div
-        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
-    >
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
         <div class="flex-1 min-w-0">
             <!-- Title -->
             <div class="mt-2">
-                <h2
-                    class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
-                >
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
                     ทดสอบ
                 </h2>
             </div>
         </div>
     </div>
-    <div class="flex-auto p-3 sm:p-10">
-        <div class="flex flex-col sm:flex-row p-8 w-full justify-between">
-            <section class="bg-white dark:bg-gray-900 w-full">
-                <form action="#" class="space-y-8" [formGroup]="formData">
-                    <div
-                        class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md w-full"
-                    >
-                        <div>
-                            <mat-form-field class="w-full">
-                                <mat-label
-                                    for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >เลือกวันที่จองศาลา</mat-label
-                                >
-                                <mat-date-range-input [rangePicker]="picker">
-                                    <input
-                                        matStartDate
-                                        [formControlName]="'fdate'"
-                                        placeholder="วันที่เริ่ม"
-                                    />
-                                    <input
-                                        matEndDate
-                                        [formControlName]="'edate'"
-                                        placeholder="วันที่สิ้นสุด"
-                                    />
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle
-                                    matSuffix
-                                    [for]="picker"
-                                ></mat-datepicker-toggle>
-                                <mat-date-range-picker
-                                    #picker
-                                ></mat-date-range-picker>
-                            </mat-form-field>
-                        </div>
-
-                        <div>
-                            <mat-form-field class="w-full">
-                                <mat-label
-                                    for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >ชื่อผู้ติดต่อ</mat-label
-                                >
-                                <input matInput [formControlName]="'name'" />
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field class="w-full">
-                                <mat-label
-                                    for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >อีเมล</mat-label
-                                >
-                                <input matInput [formControlName]="'email'" />
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field class="w-full">
-                                <mat-label
-                                    for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >เบอร์ติดต่อ</mat-label
-                                >
-                                <input matInput [formControlName]="'tel'" />
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field class="w-full">
-                                <mat-label
-                                    for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >เลขประจำตัวผู้เสียภาษี</mat-label
-                                >
-                                <input matInput [formControlName]="'tax_id'" />
-                            </mat-form-field>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>รายละเอียด</mat-label>
-                                <textarea
-                                    matInput
-                                    rows="4"
-                                    [formControlName]="'remark'"
-                                    placeholder="กรุณาระบุรายละเอียด"
-                                ></textarea>
-                            </mat-form-field>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <mat-form-field class="w-full pr-2">
-                                <mat-label>ที่อยู่ผู้จอง</mat-label>
-                                <textarea
-                                    matInput
-                                    rows="4"
-                                    [formControlName]="'address'"
-                                    placeholder="กรุณาระบุรายละเอียด"
-                                ></textarea>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </div>
-        <div class="flex items-center justify-end w-full border-t px-8 py-4">
-            <div class="flex items-center justify-end">
-                <a class="ml-4" mat-flat-button (click)="goBack()">
-                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
-                    ย้อนกลับ
-                </a>
+    <div class="max-w-md mx-auto">
+        <form [formGroup]="borrowForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="name">
+                    ชื่อผู้ยืม
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name" type="text" placeholder="ชื่อผู้ยืม" formControlName="name">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="email">
+                    อีเมล
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="email" type="email" placeholder="อีเมล" formControlName="email">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="phone">
+                    เบอร์โทรศัพท์
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="phone" type="text" placeholder="เบอร์โทรศัพท์" formControlName="phone">
+            </div>
+            <div formArrayName="items">
+                <div *ngFor="let item of items.controls; let i = index" class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="item{{i}}">
+                        สินค้าที่ {{i+1}}
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="name{{i}}" type="text" placeholder="ชื่อสินค้า" [formControlName]="name">
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="qty{{i}}" type="number" placeholder="จำนวน" [formControlName]="qty">
+                    <button type="button" (click)="removeItem(i)" class="ml-2 px-2 py-1 bg-red-500 text-white rounded">
+                        ลบ
+                    </button>
+                </div>
+                <button type="button" (click)="addItem()" class="mb-4 px-2 py-1 bg-blue-500 text-white rounded">
+                    เพิ่มสินค้า
+                </button>
+            </div>
+            <div class="flex items-center justify-center">
                 <button
-                    class="px-6 ml-3 mat-primary"
-                    mat-flat-button
-                    (click)="create()"
-                >
-                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit">
                     ยืนยัน
                 </button>
             </div>
-        </div>
+        </form>
+        check : {{this.borrowForm.value | json}}
     </div>
 </div>

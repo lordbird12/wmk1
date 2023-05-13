@@ -17,7 +17,7 @@ import { SalaService } from '../sala.service';
 // import { LocationService } from '../../location/location.service';
 // import { VendorService } from '../../vendor/vendor.service';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
-
+import moment from 'moment';
 @Component({
     selector: 'edit-reserve-sala',
     templateUrl: './edit-reserve-sala.component.html',
@@ -132,6 +132,9 @@ export class EditReserveSalaComponent implements OnInit, AfterViewInit, OnDestro
 
     }
     update(): void {
+
+        const fdate = moment(this.formData.value.fdate).format('YYYY-MM-DD')
+        const edate = moment(this.formData.value.edate).format('YYYY-MM-DD')
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
@@ -165,7 +168,9 @@ export class EditReserveSalaComponent implements OnInit, AfterViewInit, OnDestro
             // If the confirm button pressed...
             if (result === 'confirmed') {
                 // console.log(this.formData.value)
-                const formValue = this.formData.value
+                const formValue = this.formData.value;
+                formValue.fdate = fdate
+                formValue.edate = edate
                 // var date_start = formValue.fdate
                 // var date_end = formValue.edate
                 // if (date_start.length > 10) {

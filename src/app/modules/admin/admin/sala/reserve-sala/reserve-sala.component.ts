@@ -20,7 +20,7 @@ import { MonkService } from '../../monk/monk.service';
 // import { VendorService } from '../../../vendor/vendor.service';
 // import { ModalItem } from '../../../item/modal-item/modal-item.component';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
-
+import moment from 'moment';
 @Component({
     selector: 'reserve-sala',
     templateUrl: './reserve-sala.component.html',
@@ -149,11 +149,13 @@ export class ReserveSalaComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     create(): void {
+        const fdate = moment(this.formData.value.fdate).format('YYYY-MM-DD')
+        const edate = moment(this.formData.value.edate).format('YYYY-MM-DD')
+
+
         this.flashMessage = null;
         this.flashErrorMessage = null;
         // Return if the form is invalid
-
-
         const confirmation = this._fuseConfirmationService.open({
             "title": "จองศาลา",
             "message": "คุณต้องการจองศาลาใช่หรือไม่",
@@ -178,12 +180,9 @@ export class ReserveSalaComponent implements OnInit, AfterViewInit, OnDestroy {
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
                 const formValue = this.formData.value;
-                let datestart = formValue.fdate._i.year + '-' + formValue.fdate._i.month + '-' + formValue.fdate._i.date;
-                formValue.fdate = datestart
-                let datestop = formValue.edate._i.year + '-' + formValue.edate._i.month + '-' + formValue.edate._i.date;
-                formValue.edate = datestop
+                formValue.fdate = fdate
+                formValue.edate = edate
                 console.log(formValue);
-
                 this._Service.addReserve(formValue).subscribe({
                     next: (resp: any) => {
                         this._fuseConfirmationService.open({

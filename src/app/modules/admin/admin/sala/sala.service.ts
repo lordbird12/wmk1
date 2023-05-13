@@ -219,7 +219,7 @@ export class SalaService {
     getComments(assetId: any): Observable<any[]> {
         return this._httpClient.post<any[]>(environment.API_URL + 'api/assets/get_asset_by_brief', {
             brief_id: assetId
-        }, this.httpOptionsFormdata).pipe(
+        }).pipe(
             take(1),
             map((products) => {
 
@@ -574,7 +574,7 @@ export class SalaService {
     }
 
     getCommentsOSM(assetId: any): Observable<any[]> {
-        return this._httpClient.get<any[]>(environment.API_URL + 'api/brief-osm-comment-by-brief-osm/' + assetId, this.httpOptionsFormdata).pipe(
+        return this._httpClient.get<any[]>(environment.API_URL + 'api/brief-osm-comment-by-brief-osm/' + assetId).pipe(
             take(1),
             map((products) => {
 
@@ -592,7 +592,7 @@ export class SalaService {
     }
 
     approveArtwork(data: any, briefId): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/briefs/' + briefId + '/approve_asset', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/briefs/' + briefId + '/approve_asset', data).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -601,7 +601,7 @@ export class SalaService {
     }
 
     approveArtworkAll(data: any, briefId): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/briefs/' + briefId + '/approve_asset_all', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/briefs/' + briefId + '/approve_asset_all', data).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -610,7 +610,7 @@ export class SalaService {
     }
 
     approveArtworkOSM(data: any, briefId): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/briefs-osm-store-file/' + briefId + '/approve', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/briefs-osm-store-file/' + briefId + '/approve', data).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -619,7 +619,7 @@ export class SalaService {
     }
 
     approveArtworkOSMND(data: any, briefId): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/brief-osm-store/' + briefId + '/lanlord-confirm', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/brief-osm-store/' + briefId + '/lanlord-confirm', data).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -636,7 +636,7 @@ export class SalaService {
     // }
 
     comment(data: any): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/asset-comments', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/asset-comments', data).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -688,7 +688,7 @@ export class SalaService {
     }
 
     commentOSM(data: any): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/brief-osm-comment', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/brief-osm-comment', data).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -767,7 +767,7 @@ export class SalaService {
         //     return throwError('User is already logged in.');
         // }
 
-        return this._httpClient.post(environment.API_URL + 'api/briefs-osm/create', brief, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/briefs-osm/create', brief).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -784,7 +784,7 @@ export class SalaService {
         //     return throwError('User is already logged in.');
         // }
 
-        return this._httpClient.put(environment.API_URL + 'api/briefs-osm/' + osm + '/update?populate[0]=brief_osm_stores.store&populate[1]=artwork_supplier_id&populate[2]=production_supplier_id&populate[3]=brief_files', brief, this.httpOptionsFormdata).pipe(
+        return this._httpClient.put(environment.API_URL + 'api/briefs-osm/' + osm + '/update?populate[0]=brief_osm_stores.store&populate[1]=artwork_supplier_id&populate[2]=production_supplier_id&populate[3]=brief_files', brief).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -821,14 +821,14 @@ export class SalaService {
 
     uploadFile(item: FormData): Observable<any> {
         return this._httpClient
-            .post<any>(environment.API_URL + 'api/upload', item, this.httpOptionsFormdata)
+            .post<any>(environment.API_URL + 'api/upload', item)
             .pipe(catchError(this.handlerError));
     }
 
     uploadArtwork(artwork: any, briefId): Observable<any> {
         return this.products$.pipe(
             take(1),
-            switchMap(products => this._httpClient.post<any>(environment.API_URL + 'api/briefs/' + briefId + '/upload_artworks', artwork, this.httpOptionsFormdata).pipe(
+            switchMap(products => this._httpClient.post<any>(environment.API_URL + 'api/briefs/' + briefId + '/upload_artworks', artwork).pipe(
                 map((newProduct) => {
 
                     // Update the products with the new product
@@ -843,12 +843,12 @@ export class SalaService {
 
     getLastNumber(req: any): Observable<any> {
         console.log(req);
-        return this._httpClient.post<any>(environment.API_URL + 'api/assets/get_last_number', req, this.httpOptionsFormdata);
+        return this._httpClient.post<any>(environment.API_URL + 'api/assets/get_last_number', req);
     }
 
     getAssetItems(req: any): Observable<AssetItem> {
-        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1', this.httpOptionsFormdata).pipe(
-        return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1', this.httpOptionsFormdata).pipe(
+        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1').pipe(
+        return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1').pipe(
             take(1),
             map((products) => {
 
@@ -866,7 +866,7 @@ export class SalaService {
     }
 
     getAssetCategory(): Observable<AssetCategory[]> {
-        return this._httpClient.get<AssetCategory[]>(environment.API_URL + 'api/asset-categories?populate=*&pagination[withCount]=false', this.httpOptionsFormdata)
+        return this._httpClient.get<AssetCategory[]>(environment.API_URL + 'api/asset-categories?populate=*&pagination[withCount]=false')
             .pipe();
     }
 
@@ -942,7 +942,7 @@ export class SalaService {
 
     getPrintingCost(req: any): Observable<any> {
         console.log(req);
-        return this._httpClient.post<any>(environment.API_URL + 'api/get-printing-cost', req, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post<any>(environment.API_URL + 'api/get-printing-cost', req).pipe(
             take(1),
             map((products) => {
 
@@ -974,7 +974,7 @@ export class SalaService {
 
 
     createItem(itemData: FormData): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/item', itemData, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/item', itemData).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -983,7 +983,7 @@ export class SalaService {
     }
 
     getItem(itemData: any): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/get_item', { item_type_id: itemData }, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/get_item', { item_type_id: itemData }).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -1041,7 +1041,7 @@ export class SalaService {
     }
 
     updateItem(itemData: FormData): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/update_sala', itemData, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/update_sala', itemData).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -1050,7 +1050,7 @@ export class SalaService {
     }
 
     updateReserve(itemData, itemId: string): Observable<any> {
-        return this._httpClient.put(environment.API_URL + 'api/rent_sala/' + itemId, itemData, this.httpOptionsFormdata).pipe(
+        return this._httpClient.put(environment.API_URL + 'api/rent_sala/' + itemId, itemData).pipe(
             switchMap((response: any) => {
                 return of(response);
             })
@@ -1058,7 +1058,7 @@ export class SalaService {
     }
 
     getSalaPage(dataTablesParameters: any): Observable<DataTablesResponse> {
-        return this._httpClient.post(environment.API_URL + 'api/sala_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/sala_page', dataTablesParameters).pipe(
             switchMap((response: any) => {
                 return of(response.data);
             })
@@ -1066,7 +1066,7 @@ export class SalaService {
     }
 
     getReservePage(dataTablesParameters: any): Observable<DataTablesResponse> {
-        return this._httpClient.post(environment.API_URL + 'api/rent_sala_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/rent_sala_page', dataTablesParameters).pipe(
             switchMap((response: any) => {
                 return of(response.data);
             })
@@ -1075,7 +1075,7 @@ export class SalaService {
 
 
     newSala(itemData): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/sala', itemData, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/sala', itemData).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
@@ -1084,7 +1084,7 @@ export class SalaService {
     }
 
     addReserve(itemData): Observable<any> {
-        return this._httpClient.post(environment.API_URL + 'api/rent_sala', itemData, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/rent_sala', itemData).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);

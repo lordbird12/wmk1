@@ -1036,7 +1036,7 @@ export class Service {
     }
 
     getAssetItems(req: any): Observable<AssetItem> {
-        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1', this.httpOptionsFormdata).pipe(
+        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1').pipe(
         return this._httpClient
             .get<AssetItem>(
                 environment.API_URL +

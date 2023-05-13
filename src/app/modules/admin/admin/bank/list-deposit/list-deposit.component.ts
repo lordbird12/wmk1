@@ -326,6 +326,7 @@ export class ListDepositComponent implements OnInit, AfterViewInit, OnDestroy {
                     .getTransactionPage(dataTablesParameters)
                     .subscribe((resp) => {
                         this.dataRow = resp.data;
+                        console.log('aaa',this.dataRow)
                         this.totalRowSummary = this.totalPriceTable();
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;

@@ -67,7 +67,7 @@ export class MenuService {
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient) { }
 
     httpOptionsFormdata = {
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
@@ -352,15 +352,15 @@ export class MenuService {
     }
 
     getAssetItems(req: any): Observable<AssetItem> {
-        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1', this.httpOptionsFormdata).pipe(
+        // return this._httpClient.get<AssetItem>(environment.API_URL + 'api/items?filters[size_for_ec][$eq]=' + req.size_for_ec + '&filters[store_type][$eq]=' + req.store_type + '&filters[season][$eq]=' + req.season + '&filters[division][$eq]=' + req.division + '&pagination[limit]=1').pipe(
         return this._httpClient
             .get<AssetItem>(
                 environment.API_URL +
-                    'api/items?filters[season][$eq]=' +
-                    req.season +
-                    '&filters[division][$eq]=' +
-                    req.division +
-                    '&pagination[limit]=1',
+                'api/items?filters[season][$eq]=' +
+                req.season +
+                '&filters[division][$eq]=' +
+                req.division +
+                '&pagination[limit]=1',
                 this.httpOptionsFormdata
             )
             .pipe(
@@ -384,7 +384,7 @@ export class MenuService {
         return this._httpClient
             .get<AssetCategory[]>(
                 environment.API_URL +
-                    'api/asset-categories?populate=*&pagination[withCount]=false',
+                'api/asset-categories?populate=*&pagination[withCount]=false',
                 this.httpOptionsFormdata
             )
             .pipe();
@@ -507,7 +507,7 @@ export class MenuService {
                 })
             );
     }
-    
+
     setPermissionAll(data: any): Observable<any> {
         return this._httpClient
             .post(

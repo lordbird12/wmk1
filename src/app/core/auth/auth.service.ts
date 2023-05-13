@@ -77,7 +77,7 @@ export class AuthService {
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
-    ) {}
+    ) { }
 
     httpOptionsFormdata = {
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
@@ -277,7 +277,7 @@ export class AuthService {
     // role(): Observable<any> {
 
     //     // If the access token exists and it didn't expire, sign in using it
-    //     return this._httpClient.get(environment.API_URL + 'api/users/me', this.httpOptionsFormdata).pipe(
+    //     return this._httpClient.get(environment.API_URL + 'api/users/me').pipe(
     //         switchMap((response: any) => {
 
     //             // Store the access token in the local storage
@@ -290,7 +290,7 @@ export class AuthService {
     // }
 
     // me(): Observable<any> {
-    //     return this._httpClient.get(environment.API_URL + 'api/users/me', this.httpOptionsFormdata);
+    //     return this._httpClient.get(environment.API_URL + 'api/users/me');
     // }
 
     get requireResetPassword(): boolean {
