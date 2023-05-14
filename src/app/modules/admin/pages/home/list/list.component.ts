@@ -165,7 +165,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 datasets: [
                     {
                         label: 'รายการเดินบัญชี',
-                        //  lineTension: 0.2, 
+                        //  lineTension: 0.2,
                         fill: false,
                         backgroundColor: 'rgba(75,192,192,0.4)',
                         borderColor: 'rgba(75,192,192,1)',
@@ -380,7 +380,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.pages.last_page = resp.last_page;
                     this.pages.per_page = resp.per_page;
                     if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
+                        this.pages.begin =  resp.per_page * (resp.current_page - 1);
                     } else {
                         this.pages.begin = 0;
                     }

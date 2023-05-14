@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent relative">
     <!-- Header -->
     <div
         class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
@@ -156,6 +156,49 @@
                 </button>
             </div>
         </div>
-        <pre></pre>
+
+    </div>
+    <div class="flex flex-auto overflow-hidden">
+        <!-- Products list -->
+        <div
+            class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto sm:relative overflow-x-auto"
+        >
+            <table
+                datatable
+                [dtOptions]="dtOptions"
+                class="table row-border hover"
+                style="width: 100%"
+            >
+                <thead>
+                    <tr>
+                        <th>ลำดับ</th>
+                        <th>ชื่อผู้ใช้งาน</th>
+                        <th>อีเมล</th>
+                        <th>รายระเอียด</th>
+                        <th>สร้างโดย</th>
+                        <th>วันที่สร้าง</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="dataRow?.length != 0">
+                    <tr *ngFor="let item of dataRow; let i = index">
+                        <td>{{ pages.begin + (i + 1) }}</td>
+                        <td>{{ item.User.name }}</td>
+                        <td>{{ item.User.email }}</td>
+                        <td>{{ item.type }}</td>
+                        <td>Admin</td>
+                        <td>
+                            {{ item.created_at }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="dataRow?.length == 0">
+                    <tr>
+                        <td colspan="9" class="no-data-available text-center">
+                            ไม่มีข้อมูล !
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

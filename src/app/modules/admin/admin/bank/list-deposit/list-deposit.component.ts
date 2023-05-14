@@ -326,13 +326,14 @@ export class ListDepositComponent implements OnInit, AfterViewInit, OnDestroy {
                     .getTransactionPage(dataTablesParameters)
                     .subscribe((resp) => {
                         this.dataRow = resp.data;
+                        console.log('aaa',this.dataRow)
                         this.totalRowSummary = this.totalPriceTable();
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;
                         this.pages.per_page = resp.per_page;
                         if (resp.current_page > 1) {
                             this.pages.begin =
-                                resp.per_page * resp.current_page - 1;
+                                 resp.per_page * (resp.current_page - 1);
                         } else {
                             this.pages.begin = 0;
                         }

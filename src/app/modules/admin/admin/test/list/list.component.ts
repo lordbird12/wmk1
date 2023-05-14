@@ -94,7 +94,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-        
+
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     ngOnInit(): void {
         this.loadTable();
-        
+
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
@@ -125,14 +125,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 that._Service
                     .getPage(dataTablesParameters)
                     .subscribe((resp) => {
-                        
+
                         this.dataRow = resp.data;
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;
                         this.pages.per_page = resp.per_page;
                         if (resp.current_page > 1) {
                             this.pages.begin =
-                                resp.per_page * resp.current_page - 1;
+                                 resp.per_page * (resp.current_page - 1);
                         } else {
                             this.pages.begin = 0;
                         }

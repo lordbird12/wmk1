@@ -9,6 +9,7 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import {
+    FormArray,
     FormBuilder,
     FormControl,
     FormGroup,
@@ -90,14 +91,14 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     keyData2: any = 0;
     supplierId: string | null;
     pagination: Pagination;
-
+    borrowForm: FormGroup;
     /**
      * Constructor
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
-        private _formBuilder: FormBuilder,
+        private fb: FormBuilder,
         private _Service: Service,
         private _matDialog: MatDialog,
         private _router: Router,
@@ -116,27 +117,43 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * On init
      */
-    async ngOnInit(): Promise<void> {
-        this.formData = this._formBuilder.group({
-            name: '',
-            location_id: [''],
-            qty: '',
-            remark: '',
-            image: ''
-        });
-
-        const location = await lastValueFrom(this._ServiceLocation.getLocation())
-        this.locationData = location.data
-
-        this.getMonk();
-        this.editor = new Editor();
-    }
-
-    getMonk(): void {
-        this._Service.getMonk().subscribe((resp) => {
-            this.blogData = resp.data;
+    ngOnInit() {
+        this.borrowForm = this.fb.group({
+            name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            phone: ['', Validators.required],
+            items: this.fb.array([
+                this.fb.group({
+                    name: ['', Validators.required],
+                    qty: [1, Validators.required]
+                })
+            ])
         });
     }
+    createItem(): string {
+        return '';
+    }
+
+    get items(): FormArray {
+        return this.borrowForm.get('items') as FormArray;
+    }
+
+    addItem(): void {
+        this.items.push(this.fb.group({
+            name: ['', Validators.required],
+            qty: [0, Validators.required]
+        }));
+    }
+
+    removeItem(index: number): void {
+        this.items.removeAt(index);
+    }
+
+    onSubmit(): void {
+        console.log(this.borrowForm.value);
+        // ส่งค่าฟอร์มไปยัง API หรือประมวลผลต่อไป
+    }
+
 
     /**
      * After view init
@@ -160,76 +177,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         this._changeDetectorRef.detectChanges();
     }
 
-    create(): void {
-        this.flashMessage = null;
-        this.flashErrorMessage = null;
 
-        const confirmation = this._fuseConfirmationService.open({
-            title: 'สร้างรายการใหม่',
-            message: 'คุณต้องการสร้างรายการใหม่ใช่หรือไม่ ',
-            icon: {
-                show: false,
-                name: 'heroicons_outline:exclamation',
-                color: 'warning',
-            },
-            actions: {
-                confirm: {
-                    show: true,
-                    label: 'ยืนยัน',
-                    color: 'primary',
-                },
-                cancel: {
-                    show: true,
-                    label: 'ยกเลิก',
-                },
-            },
-            dismissible: true,
-        });
-        // Subscribe to the confirmation dialog closed action
-        confirmation.afterClosed().subscribe((result) => {
-            // If the confirm button pressed...
-            if (result === 'confirmed') {
-                let formValue = this.formData.value;
-
-                const formData = new FormData();
-                Object.entries(formValue).forEach(([key, value]: any[]) => {
-                    formData.append(key, value);
-                });
-
-                this._Service.create(formData).subscribe({
-                    next: (resp: any) => {
-                        this._router
-                            .navigateByUrl('word/list')
-                            .then(() => { });
-                    },
-                    error: (err: any) => {
-                        this._fuseConfirmationService.open({
-                            title: 'กรุณาระบุข้อมูล',
-                            message: err.error.message,
-                            icon: {
-                                show: true,
-                                name: 'heroicons_outline:exclamation',
-                                color: 'warning',
-                            },
-                            actions: {
-                                confirm: {
-                                    show: false,
-                                    label: 'ยืนยัน',
-                                    color: 'primary',
-                                },
-                                cancel: {
-                                    show: false,
-                                    label: 'ยกเลิก',
-                                },
-                            },
-                            dismissible: true,
-                        });
-                        // console.log(err.error.message);
-                    },
-                });
-            }
-        });
-    }
 
     onSelect(event) {
         this.files.push(...event.addedFiles);
