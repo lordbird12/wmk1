@@ -267,9 +267,17 @@ export class ListDepositComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     totalPriceTable() {
+        let total1 = 0;
+        let total2 = 0;
         let total = 0;
         for (let data of this.dataRow) {
-            total += Number(data.price);
+            console.log(data);
+            if(data.type == "deposit"){
+                total1 += Number(data.price);
+            }else if(data.type == "withdraw"){
+                total2 += Number(data.price);
+            }
+            total = total1 - total2;
         }
         return total;
     }
@@ -348,6 +356,7 @@ export class ListDepositComponent implements OnInit, AfterViewInit, OnDestroy {
             columns: [
                 { data: 'No' },
                 { data: 'bank.name' },
+                { data: 'type' },
                 { data: 'type' },
                 { data: 'price' },
                 { data: 'create_by' },
